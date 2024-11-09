@@ -48,3 +48,7 @@ export interface AsyncHandlerReturn<T> {
   statusCode: number;
   data?: T;
 }
+
+export type UserType = InferResultType<"UserTable">;
+export type ProjectType = InferResultType<"ProjectTable">;
+export type UserToProjectType = InferResultType<"UserToProjectTable">;

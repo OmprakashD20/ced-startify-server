@@ -5,6 +5,8 @@ import {
   uuid,
   text,
   primaryKey,
+  boolean,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -15,6 +17,7 @@ export const UserTable = pgTable("users", {
   college: varchar({ length: 255 }).notNull(),
   countryCode: varchar("country_code", { length: 5 }).notNull(),
   phone: varchar({ length: 15 }).notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 export const ProjectTable = pgTable("projects", {
@@ -22,6 +25,11 @@ export const ProjectTable = pgTable("projects", {
   name: varchar({ length: 255 }).notNull(),
   description: text().notNull(),
   pptLink: varchar("ppt_link", { length: 255 }).notNull(),
+  approved: boolean().notNull().default(false),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
 
 export const UserToProjectTable = pgTable(

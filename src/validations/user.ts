@@ -25,7 +25,8 @@ export const UserSchema = z.object({
 
   phone: z
     .string()
-    .length(15, "Phone number must be exactly 15 characters.")
+    .min(10, "Phone number must be atleast 10 digits.")
+    .max(15, "Phone number cannot exceed 15 digits.")
     .regex(/^\d+$/, "Phone number must contain only digits."),
 });
 

@@ -25,3 +25,18 @@ export const ProjectSchema = z.object({
 });
 
 export type ProjectSchemaType = z.infer<typeof ProjectSchema>;
+
+export const ApproveProjectSchema = z.object({
+  query: z.object({
+    id: z.string({
+      message: "Select a project to update.",
+    }),
+  }),
+  body: z.object({
+    approved: z.boolean({
+      required_error: "Specify if the project is approved or not.",
+    }),
+  }),
+});
+
+export type ApproveProjectSchemaType = z.infer<typeof ApproveProjectSchema>;

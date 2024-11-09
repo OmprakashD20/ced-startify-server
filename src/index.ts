@@ -7,6 +7,7 @@ import "./path";
 
 import config from "@/config";
 import ErrorHandler from "@/middlewares/errorHandler";
+import router from "@/routes";
 import AsyncHandler from "@/utils/asyncHandler";
 import { NotFoundError } from "@/utils/errors";
 
@@ -27,9 +28,11 @@ app.use(express.json());
 app.get(
   "/",
   AsyncHandler(async (_: Request, __: Response) => {
-    return { message: "Starter Template", statusCode: 200 };
+    return { message: "CED Startify Server", statusCode: 200 };
   })
 );
+
+app.use("/api", router);
 
 //404 handler
 app.all(
