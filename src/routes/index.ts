@@ -1,39 +1,11 @@
 import express from "express";
 
-import {
-  createProjectController,
-  getProjectsController,
-  approveProjectController,
-} from "@/controllers/project";
-import AsyncHandler from "@/utils/asyncHandler";
-import ValidatorFactory from "@/validations";
-import {
-  ApproveProjectSchema,
-  ApproveProjectSchemaType,
-  ProjectSchema,
-  ProjectSchemaType,
-} from "@/validations/project";
+import PaymentRouter from "@/routes/payment";
+import v1Router from "@/routes/v1";
 
 const router = express.Router();
 
-router.get("/projects", AsyncHandler(getProjectsController));
-
-const { validator: createProjectValidator } =
-  ValidatorFactory<ProjectSchemaType>(ProjectSchema);
-
-router.post(
-  "/create-project",
-  createProjectValidator,
-  AsyncHandler(createProjectController)
-);
-
-const { validator: approveProjectValidator } =
-  ValidatorFactory<ApproveProjectSchemaType>(ApproveProjectSchema);
-
-router.patch(
-  "/approve-project",
-  approveProjectValidator,
-  AsyncHandler(approveProjectController)
-);
+router.use("/payment", PaymentRouter);
+router.use("/v1", v1Router);
 
 export default router;

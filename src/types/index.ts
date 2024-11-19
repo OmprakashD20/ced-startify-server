@@ -37,6 +37,9 @@ export interface AppConfig {
     PORT: number;
     NODE_ENV: string;
     DATABASE_URL: string;
+    RAZORPAY_KEY_ID: string;
+    RAZORPAY_KEY_SECRET: string;
+    RESEND_API_KEY: string;
   };
 }
 
@@ -49,6 +52,11 @@ export interface AsyncHandlerReturn<T> {
   data?: T;
 }
 
-export type UserType = InferResultType<"UserTable">;
-export type ProjectType = InferResultType<"ProjectTable">;
-export type UserToProjectType = InferResultType<"UserToProjectTable">;
+export type StudentType = InferResultType<"StudentTable">;
+export type StartUpCafeType = InferResultType<"StartUpCafeTable">;
+export type StudentToStartUpCafeType =
+  InferResultType<"StudentToStartUpCafeTable">;
+export type FounderType = InferResultType<"FounderTable">;
+export type CompanyType = InferResultType<"CompanyTable">;
+export type CoFounderType = InferResultType<"CoFounderTable">;
+export type StartUpMughavariType = InferResultType<"StartupMughavariTable">;

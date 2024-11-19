@@ -6,6 +6,9 @@ const EnvSchema = z.object({
   PORT: z.number(),
   NODE_ENV: z.enum(["development", "production", "staging"]),
   DATABASE_URL: z.string().url(),
+  RAZORPAY_KEY_ID: z.string(),
+  RAZORPAY_KEY_SECRET: z.string(),
+  RESEND_API_KEY: z.string(),
 });
 
 type EnvSchemaType = z.infer<typeof EnvSchema>;
@@ -15,6 +18,9 @@ export default function validateEnv(): EnvSchemaType {
     PORT: process.env.PORT ? Number(process.env.PORT) : 8000,
     NODE_ENV: process.env.NODE_ENV as EnvSchemaType["NODE_ENV"],
     DATABASE_URL: process.env.DATABASE_URL!,
+    RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID!,
+    RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET!,
+    RESEND_API_KEY: process.env.RESEND_API_KEY!,
   };
 
   const result = EnvSchema.safeParse(env);

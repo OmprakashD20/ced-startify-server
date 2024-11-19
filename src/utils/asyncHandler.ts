@@ -25,8 +25,11 @@ export default function AsyncHandler<
     try {
       const { statusCode, ...data } = await fn(req, res);
 
-      res.status(statusCode).json({ success: true, data });
+      const success = statusCode < 400;
+
+      res.status(statusCode).json({ success, data });
     } catch (error: any) {
+      console.log(error);
       if (error instanceof HTTPError) next(error);
       else throw new ServerError();
     }

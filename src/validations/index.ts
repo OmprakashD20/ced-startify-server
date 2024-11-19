@@ -14,6 +14,7 @@ export default function ValidatorFactory<T>(
       schema.parse(data);
       return next();
     } catch (error: any) {
+      console.log(error);
       if (error instanceof ZodError) {
         const issue = error.errors[0];
         throw new ValidationError(issue.message);

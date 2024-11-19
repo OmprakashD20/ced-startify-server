@@ -1,1 +1,0 @@
-ALTER TABLE "projects" ADD COLUMN "approved" boolean DEFAULT false NOT NULL;
