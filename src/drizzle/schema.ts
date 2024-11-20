@@ -94,6 +94,68 @@ export const StartupMughavariTable = pgTable("startup_mughavari", {
     .$onUpdate(() => new Date()),
 });
 
+export const InternHuntStartupTable = pgTable("intern_hunt_startups", {
+  id: varchar("id").primaryKey(),
+  startupName: varchar("startup_name").notNull(),
+  founderName: varchar("founder_name").notNull(),
+  designation: varchar("designation").notNull(),
+  email: varchar("email").notNull(),
+  mobile: varchar("mobile").notNull(),
+  website: varchar("website"),
+  location: varchar("location").notNull(),
+  industryDomain: varchar("industry_domain").notNull(),
+  otherIndustryDomain: varchar("other_industry_domain"),
+  internshipRoles: text("internship_roles").notNull(),
+  otherInternshipRole: varchar("other_internship_role"),
+  preferredSkills: text("preferred_skills").notNull(),
+  internshipPositions: integer("internship_positions").notNull(),
+  internshipDuration: varchar("internship_duration").notNull(),
+  internshipMode: varchar("internship_mode").notNull(),
+  stipendDetails: varchar("stipend_details"),
+  isPaid: varchar("is_paid").notNull(),
+});
+
+export const InternHuntStudentTable = pgTable("intern_hunt_students", {
+  id: varchar("id").primaryKey(),
+  fullName: varchar("full_name").notNull(),
+  email: varchar("email").notNull(),
+  mobile: varchar("mobile").notNull(),
+  gender: varchar("gender").notNull(),
+  institutionName: varchar("institution_name").notNull(),
+  course: varchar("course").notNull(),
+  yearOfStudy: varchar("year_of_study").notNull(),
+  dateOfBirth: varchar("date_of_birth").notNull(),
+  preferredDomain: varchar("preferred_domain").notNull(),
+  otherPreferredDomain: varchar("other_preferred_domain"),
+  preferredInternshipType: varchar("preferred_internship_type").notNull(),
+  availability: varchar("availability").notNull(),
+  openToUnpaid: varchar("open_to_unpaid").notNull(),
+  skills: text("skills").notNull(),
+  otherSkills: varchar("other_skills"),
+  previousExperience: text("previous_experience"),
+  resume: varchar("resume"),
+  participationReason: text("participation_reason").notNull(),
+  preferredStartupType: varchar("preferred_startup_type").notNull(),
+  otherPreferredStartupType: varchar("other_preferred_startup_type"),
+});
+
+export const StartupAtlasTable = pgTable("startup_atlas", {
+  id: varchar("id").primaryKey(),
+  isIndianStudent: varchar("is_indian_student").notNull(),
+  nationality: varchar("nationality").notNull(),
+  institutionName: varchar("institution_name").notNull(),
+  institutionPocName: varchar("institution_poc_name").notNull(),
+  institutionPocPhone: varchar("institution_poc_phone").notNull(),
+  institutionPocEmail: varchar("institution_poc_email").notNull(),
+  studentName: varchar("student_name").notNull(),
+  studentPhone: varchar("student_phone").notNull(),
+  studentEmail: varchar("student_email").notNull(),
+  studentDegree: varchar("student_degree").notNull(),
+  studentDepartment: varchar("student_department").notNull(),
+  yearOfStudy: varchar("year_of_study").notNull(),
+  institutionBonafide: varchar("institution_bonafide").notNull(),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));
