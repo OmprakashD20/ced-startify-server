@@ -10,7 +10,6 @@ import {
   serial,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { start } from "repl";
 
 export const StudentTable = pgTable("students", {
   id: uuid().defaultRandom().primaryKey(),
@@ -24,7 +23,7 @@ export const StudentTable = pgTable("students", {
 });
 
 export const StartUpCafeTable = pgTable("startup_cafe", {
-  id: integer().generatedAlwaysAsIdentity().primaryKey(),
+  id: varchar({ length: 256 }).primaryKey(),
   startupName: varchar("startup_name", { length: 256 }).notNull(),
   collegeName: varchar("college_name", { length: 256 }).notNull(),
   collegeEmail: varchar("college_email", { length: 256 }).notNull(),
@@ -48,7 +47,7 @@ export const StudentToStartUpCafeTable = pgTable(
     studentId: uuid("student_id")
       .notNull()
       .references(() => StudentTable.id),
-    startupCafeId: integer("startup_cafe_id")
+    startupCafeId: varchar("startup_cafe_id")
       .notNull()
       .references(() => StartUpCafeTable.id),
   },
@@ -85,7 +84,7 @@ export const CoFounderTable = pgTable("co_founders", {
 });
 
 export const StartupMughavariTable = pgTable("startup_mughavari", {
-  id: integer().generatedAlwaysAsIdentity().primaryKey(),
+  id: varchar({ length: 256 }).primaryKey(),
   companyId: integer("company_id").references(() => CompanyTable.id),
   approved: boolean().default(false),
   paymentId: text("payment_id").notNull(),

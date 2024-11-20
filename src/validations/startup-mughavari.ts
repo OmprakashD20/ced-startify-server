@@ -23,6 +23,9 @@ export const StartupMughavariSchema = z.object({
       }),
       sector: z.string().min(2, { message: "Company sector is required." }),
     }),
+    paymentId: z
+      .string()
+      .min(2, { message: "Complete your payment to submit our application." }),
   }),
 });
 

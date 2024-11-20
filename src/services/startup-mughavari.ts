@@ -11,6 +11,7 @@ import {
   CoFounderType,
   StartUpMughavariType,
 } from "@/types";
+import { generateTeamId } from "@/utils";
 
 type FounderParams = {
   data: Omit<FounderType, "id">;
@@ -70,10 +71,10 @@ type StartUpMughavariParams = {
 export async function createStartUpMughavari(
   { data, companyId }: StartUpMughavariParams,
   txn = db
-): Promise<{ id: number }> {
+): Promise<{ id: string }> {
   const [startup] = await txn
     .insert(StartupMughavariTable)
-    .values({ ...data, companyId })
+    .values({ ...data, companyId, id: generateTeamId("SM") })
     .returning();
 
   return { id: startup.id };

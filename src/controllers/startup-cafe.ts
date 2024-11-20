@@ -45,11 +45,14 @@ export async function createProjectController(
         studentId,
       });
     });
-  });
 
-  await sendEmail({
-    to: students[0].email,
-    subject: "Application Submitted",
+    await sendEmail({
+      to: students[0].email,
+      subject: "Application Submitted",
+      name: students[0].name,
+      teamId: startupCafeId,
+      eventName: "Startup Cafe Prototyping Hackathon",
+    });
   });
 
   return { statusCode: 201 };

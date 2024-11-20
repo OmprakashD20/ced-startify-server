@@ -1,1 +1,0 @@
-ALTER TABLE "startup_cafe" ADD COLUMN "payment_id" text NOT NULL;

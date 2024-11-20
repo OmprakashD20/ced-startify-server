@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1731524170556,
-      "tag": "0000_windy_paladin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1732039613459,
-      "tag": "0001_same_stingray",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1732045430607,
-      "tag": "0002_easy_the_watchers",
+      "when": 1732082690816,
+      "tag": "0000_needy_gwen_stacy",
       "breakpoints": true
     }
   ]
