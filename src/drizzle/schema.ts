@@ -114,6 +114,7 @@ export const InternHuntStartupTable = pgTable("intern_hunt_startups", {
   stipendDetails: varchar("stipend_details"),
   isPaid: varchar("is_paid").notNull(),
   paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
 });
 
 export const InternHuntStudentTable = pgTable("intern_hunt_students", {
@@ -139,6 +140,7 @@ export const InternHuntStudentTable = pgTable("intern_hunt_students", {
   preferredStartupType: varchar("preferred_startup_type").notNull(),
   otherPreferredStartupType: varchar("other_preferred_startup_type"),
   paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
 });
 
 export const StartupAtlasTable = pgTable("startup_atlas", {
@@ -157,6 +159,7 @@ export const StartupAtlasTable = pgTable("startup_atlas", {
   yearOfStudy: varchar("year_of_study").notNull(),
   institutionBonafide: varchar("institution_bonafide").notNull(),
   paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
 });
 
 export const ScholarSpinoffTable = pgTable("scholar_spinoff", {
@@ -174,6 +177,7 @@ export const ScholarSpinoffTable = pgTable("scholar_spinoff", {
   solution: text("solution").notNull(),
   trlLevel: varchar("trl_level").notNull(),
   paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
 });
 
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
