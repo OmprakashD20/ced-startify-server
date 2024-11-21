@@ -154,6 +154,7 @@ export const StartupAtlasTable = pgTable("startup_atlas", {
   studentDepartment: varchar("student_department").notNull(),
   yearOfStudy: varchar("year_of_study").notNull(),
   institutionBonafide: varchar("institution_bonafide").notNull(),
+  paymentId: varchar("payment_id").notNull(),
 });
 
 export const StudentRelations = relations(StudentTable, ({ many }) => ({

@@ -24,6 +24,7 @@ export async function createStartup(
       studentDepartment: data.student.department,
       yearOfStudy: data.student.yearOfStudy,
       institutionBonafide: data.institutionBonafide,
+      paymentId: data.paymentId,
     })
     .returning();
 

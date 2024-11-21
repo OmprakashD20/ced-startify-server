@@ -35,12 +35,12 @@ export const StartUpCafeSchema = z.object({
       .string({
         required_error: "Please select the number of team members.",
       })
-      .refine((val) => ["3", "4"].includes(val), {
-        message: "Please select either 3 or 4 team members.",
+      .refine((val) => ["1", "2", "3", "4"].includes(val), {
+        message: "Please select the no. of team members.",
       }),
     teamMembers: z
       .array(StudentSchema)
-      .min(3, { message: "At least three team members are required." })
+      .min(1, { message: "At least 1 team member is required." })
       .max(4, { message: "Maximum 4 team members allowed." }),
     sdg: z
       .string({
