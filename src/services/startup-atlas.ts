@@ -10,7 +10,7 @@ export async function createStartup(
   const [startup] = await txn
     .insert(StartupAtlasTable)
     .values({
-      id: generateTeamId("IHSU"),
+      id: generateTeamId("SA"),
       isIndianStudent: data.isIndianStudent,
       nationality: data.nationality,
       institutionName: data.institution.name,

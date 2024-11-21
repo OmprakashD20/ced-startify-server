@@ -42,6 +42,7 @@ export const InternHuntStartupSchema = z.object({
   internshipMode: z.enum(["On-site", "Remote", "Hybrid"]),
   stipendDetails: z.string().optional(),
   isPaid: z.enum(["Paid", "Unpaid"]),
+  paymentId: z.string().min(2, { message: "Payment ID is required." }),
 });
 
 export const InternHuntStudentSchema = z.object({
@@ -103,6 +104,7 @@ export const InternHuntStudentSchema = z.object({
     "Other",
   ]),
   otherPreferredStartupType: z.string().optional(),
+  paymentId: z.string().min(2, { message: "Payment ID is required." }),
 });
 
 export const InternHuntSchema = z.object({

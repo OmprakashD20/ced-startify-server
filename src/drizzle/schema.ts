@@ -113,6 +113,7 @@ export const InternHuntStartupTable = pgTable("intern_hunt_startups", {
   internshipMode: varchar("internship_mode").notNull(),
   stipendDetails: varchar("stipend_details"),
   isPaid: varchar("is_paid").notNull(),
+  paymentId: varchar("payment_id").notNull(),
 });
 
 export const InternHuntStudentTable = pgTable("intern_hunt_students", {
@@ -137,6 +138,7 @@ export const InternHuntStudentTable = pgTable("intern_hunt_students", {
   participationReason: text("participation_reason").notNull(),
   preferredStartupType: varchar("preferred_startup_type").notNull(),
   otherPreferredStartupType: varchar("other_preferred_startup_type"),
+  paymentId: varchar("payment_id").default("").notNull(),
 });
 
 export const StartupAtlasTable = pgTable("startup_atlas", {
