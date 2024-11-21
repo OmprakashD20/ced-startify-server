@@ -138,7 +138,7 @@ export const InternHuntStudentTable = pgTable("intern_hunt_students", {
   participationReason: text("participation_reason").notNull(),
   preferredStartupType: varchar("preferred_startup_type").notNull(),
   otherPreferredStartupType: varchar("other_preferred_startup_type"),
-  paymentId: varchar("payment_id").default("").notNull(),
+  paymentId: varchar("payment_id").notNull(),
 });
 
 export const StartupAtlasTable = pgTable("startup_atlas", {
