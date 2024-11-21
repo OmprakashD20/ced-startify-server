@@ -159,6 +159,23 @@ export const StartupAtlasTable = pgTable("startup_atlas", {
   paymentId: varchar("payment_id").notNull(),
 });
 
+export const ScholarSpinoffTable = pgTable("scholar_spinoff", {
+  id: varchar("id").primaryKey(),
+  scholarName: varchar("scholar_name").notNull(),
+  scholarEmail: varchar("scholar_email").notNull(),
+  scholarPhone: varchar("scholar_phone").notNull(),
+  university: varchar("university").notNull(),
+  institution: varchar("institution").notNull(),
+  institutionDistrict: varchar("institution_district").notNull(),
+  department: varchar("department").notNull(),
+  areaOfResearch: varchar("area_of_research").notNull(),
+  sdg: varchar("sdg").notNull(),
+  researchProblem: text("research_problem").notNull(),
+  solution: text("solution").notNull(),
+  trlLevel: varchar("trl_level").notNull(),
+  paymentId: varchar("payment_id").notNull(),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));

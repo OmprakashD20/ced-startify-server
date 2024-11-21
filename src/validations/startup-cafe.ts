@@ -51,12 +51,12 @@ export const StartUpCafeSchema = z.object({
       .string({
         required_error: "Your problem statement is required.",
       })
-      .max(100, { message: "Problem statement should not exceed 100 words." }),
+      .max(1000, { message: "Problem statement should not exceed 100 words." }),
     solution: z
       .string({
         required_error: "Your solution is required.",
       })
-      .max(100, { message: "Solution should not exceed 100 words." }),
+      .max(1000, { message: "Solution should not exceed 100 words." }),
   }),
 });
 
