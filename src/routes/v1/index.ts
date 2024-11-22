@@ -6,6 +6,7 @@ import InternHuntRouter from "@/routes/v1/intern-hunt";
 import StartupAtlasRouter from "@/routes/v1/startup-atlas";
 import ScholarSpinoffRouter from "@/routes/v1/scholar-spinoff";
 import StartupPathFinderRouter from "@/routes/v1/startup-path-finder";
+import PitchXRouter from "@/routes/v1/pitch-x";
 
 const v1Router = express.Router();
 
@@ -15,5 +16,6 @@ v1Router.use("/intern-hunt", InternHuntRouter);
 v1Router.use("/startup-atlas", StartupAtlasRouter);
 v1Router.use("/scholar-spinoff", ScholarSpinoffRouter);
 v1Router.use("/startup-path-finder", StartupPathFinderRouter);
+v1Router.use("/pitch-x", PitchXRouter);
 
 export default v1Router;

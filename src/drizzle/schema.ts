@@ -202,6 +202,32 @@ export const StartupPathFinderTable = pgTable("startup_path_finder", {
   approved: boolean().default(false),
 });
 
+export const PitchXMemberTable = pgTable("pitch_deck_members", {
+  id: serial("id").primaryKey(),
+  name: varchar({ length: 255 }).notNull(),
+  email: varchar({ length: 255 }).notNull(),
+  phone: varchar({ length: 255 }).notNull(),
+  pitchXId: varchar("pitch_deck_id").references(() => PitchXTable.id),
+});
+
+export const PitchXTable = pgTable("pitch_decks", {
+  id: varchar("id").primaryKey(),
+  name: varchar({ length: 255 }).notNull(),
+  email: varchar({ length: 255 }).notNull(),
+  phone: varchar({ length: 255 }).notNull(),
+  studentStatus: varchar("student_status", { length: 255 }).notNull(),
+  collegeName: varchar("college_name", { length: 255 }),
+  memberCount: varchar("member_count", { length: 255 }).notNull(),
+  isStartupRegistered: varchar("is_startup_registered", {
+    length: 255,
+  }).notNull(),
+  registrationDetails: text("registration_details"),
+  sdg: varchar({ length: 255 }).notNull(),
+  pitchDeck: varchar({ length: 255 }).notNull(),
+  paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));
@@ -239,3 +265,17 @@ export const StartupMughavariRelations = relations(
     company: one(CompanyTable),
   })
 );
+
+export const PitchDeckMemberRelations = relations(
+  PitchXMemberTable,
+  ({ one }) => ({
+    pitchDeck: one(PitchXTable, {
+      fields: [PitchXMemberTable.pitchXId],
+      references: [PitchXTable.id],
+    }),
+  })
+);
+
+export const PitchDeckRelations = relations(PitchXTable, ({ many }) => ({
+  members: many(PitchXMemberTable),
+}));
