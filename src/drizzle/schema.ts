@@ -228,6 +228,58 @@ export const PitchXTable = pgTable("pitch_decks", {
   approved: boolean().default(false),
 });
 
+export const GurusPitchTable = pgTable("gurus_pitch", {
+  id: varchar("id").primaryKey(),
+  collegeName: text("college_name").notNull(),
+  collegeDistrict: text("college_district").notNull(),
+  facultyName: text("faculty_name").notNull(),
+  facultyPhone: varchar("faculty_phone").notNull(),
+  facultyEmail: varchar("faculty_email").notNull(),
+  startupName: varchar("startup_name").notNull(),
+  isStartupRegistered: boolean("is_startup_registered").notNull(),
+  yearsLeadingStartup: text("years_leading_startup").notNull(),
+  sdg: text("sdg").notNull(),
+  startupType: text("startup_type").notNull(),
+  sector: text("sector").notNull(),
+  pitchDeck: text("pitch_deck").notNull(),
+  paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
+});
+
+export const GurusPitchMemberTable = pgTable("gurus_pitch_members", {
+  id: serial("id").primaryKey(),
+  gurusPitchId: varchar("gurus_pitch_id").references(() => GurusPitchTable.id),
+  name: varchar("name").notNull(),
+  email: varchar("email").notNull(),
+  phone: varchar("phone").notNull(),
+});
+
+export const StartupDistrictTable = pgTable("startup_district", {
+  id: varchar("id").primaryKey(),
+  startupName: text("startup_name").notNull(),
+  registrationNumber: text("registration_number"),
+  founderName: text("founder_name").notNull(),
+  founderEmail: varchar("founder_email").notNull(),
+  founderPhone: varchar("founder_phone").notNull(),
+  aboutCompany: text("about_company").notNull(),
+  sdg: text("sdg").notNull(),
+  startupType: text("startup_type").notNull(),
+  sector: text("sector").notNull(),
+  productDetails: text("product_details").notNull(),
+  paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
+});
+
+export const StartupDistrictMemberTable = pgTable("startup_district_members", {
+  id: serial("id").primaryKey(),
+  startupDistrictId: varchar("startup_district_id").references(
+    () => StartupDistrictTable.id
+  ),
+  name: varchar("name").notNull(),
+  email: varchar("email").notNull(),
+  phone: varchar("phone").notNull(),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));

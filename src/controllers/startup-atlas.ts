@@ -7,7 +7,7 @@ import sendEmail from "@/utils/email";
 
 export async function createStartupAtlasProjectController(
   req: Request<{}, {}, StartupAtlasSchemaType["body"], {}>,
-  res: Response
+  _res: Response
 ): Promise<{
   statusCode: number;
   message: string;

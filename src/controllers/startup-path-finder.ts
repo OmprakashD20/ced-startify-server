@@ -7,7 +7,7 @@ import sendEmail from "@/utils/email";
 
 export async function createStartupPathFinderController(
   req: Request<{}, {}, StartupPathFinderSchemaType["body"], {}>,
-  res: Response
+  _res: Response
 ): Promise<{ statusCode: number; message: string }> {
   const data = req.body;
 

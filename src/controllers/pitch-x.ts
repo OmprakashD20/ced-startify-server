@@ -1,4 +1,3 @@
-// controllers/pitch-deck.ts
 import { Request, Response } from "express";
 import db from "@/drizzle";
 import { createPitchX, createPitchXMember } from "@/services/pitch-x";
@@ -7,7 +6,7 @@ import sendEmail from "@/utils/email";
 
 export async function createPitchXController(
   req: Request<{}, {}, PitchXSchemaType["body"], {}>,
-  res: Response
+  _res: Response
 ): Promise<{ statusCode: number; message: string }> {
   const { teamMembers, ...data } = req.body;
 
