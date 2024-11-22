@@ -180,6 +180,28 @@ export const ScholarSpinoffTable = pgTable("scholar_spinoff", {
   approved: boolean().default(false),
 });
 
+export const StartupPathFinderTable = pgTable("startup_path_finder", {
+  id: varchar("id").primaryKey(),
+  name: varchar("name").notNull(),
+  email: varchar("email").notNull(),
+  phoneNumber: varchar("phone_number").notNull(),
+  role: varchar("role").notNull(),
+  // Student fields
+  collegeName: varchar("college_name"),
+  degree: varchar("degree"),
+  department: varchar("department"),
+  yearOfStudy: varchar("year_of_study"),
+  // Professional fields
+  designation: varchar("designation"),
+  // Entrepreneur fields
+  startupType: varchar("startup_type"),
+  // Common fields to Professional and Entrepreneur
+  companyName: varchar("company_name"),
+  sector: varchar("sector"),
+  paymentId: varchar("payment_id").notNull(),
+  approved: boolean().default(false),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));

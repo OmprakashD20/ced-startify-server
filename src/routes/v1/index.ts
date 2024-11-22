@@ -5,6 +5,7 @@ import StartUpMughavariRouter from "@/routes/v1/startup-mughavari";
 import InternHuntRouter from "@/routes/v1/intern-hunt";
 import StartupAtlasRouter from "@/routes/v1/startup-atlas";
 import ScholarSpinoffRouter from "@/routes/v1/scholar-spinoff";
+import StartupPathFinderRouter from "@/routes/v1/startup-path-finder";
 
 const v1Router = express.Router();
 
@@ -13,5 +14,6 @@ v1Router.use("/startup-mughavari", StartUpMughavariRouter);
 v1Router.use("/intern-hunt", InternHuntRouter);
 v1Router.use("/startup-atlas", StartupAtlasRouter);
 v1Router.use("/scholar-spinoff", ScholarSpinoffRouter);
+v1Router.use("/startup-path-finder", StartupPathFinderRouter);
 
 export default v1Router;
