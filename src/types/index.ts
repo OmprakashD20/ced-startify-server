@@ -41,6 +41,12 @@ export interface AppConfig {
     RAZORPAY_KEY_SECRET: string;
     RESEND_API_KEY: string;
   };
+  logs: {
+    datePattern: string;
+    maxSize: string;
+    maxFiles: string;
+    zippedArchive: boolean;
+  };
 }
 
 export interface ValidatorFactoryReturn<T> {

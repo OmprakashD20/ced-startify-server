@@ -7,6 +7,7 @@ import "./path";
 
 import config from "@/config";
 import ErrorHandler from "@/middlewares/errorHandler";
+import ResponseInterceptor from "@/middlewares/responseInterceptor";
 import router from "@/routes";
 import AsyncHandler from "@/utils/asyncHandler";
 import { NotFoundError } from "@/utils/errors";
@@ -24,6 +25,8 @@ app.use(
 );
 app.disable("x-powered-by");
 app.use(express.json());
+
+app.use(ResponseInterceptor);
 
 app.get(
   "/",
