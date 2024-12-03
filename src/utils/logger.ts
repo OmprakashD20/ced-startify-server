@@ -39,12 +39,12 @@ export default function Logger() {
     transports: [
       new DailyRotateFile({
         ...config.logs,
-        filename: "logs/combined/%DATE%.log",
+        filename: "./src/logs/combined/%DATE%.log",
         level: "info",
       }),
       new DailyRotateFile({
         ...config.logs,
-        filename: "logs/errors/%DATE%.log",
+        filename: "./src/logs/errors/%DATE%.log",
         level: "error",
       }),
     ],
