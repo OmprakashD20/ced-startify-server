@@ -9,6 +9,7 @@ import StartupPathFinderRouter from "@/routes/v1/startup-path-finder";
 import PitchXRouter from "@/routes/v1/pitch-x";
 import GurusPitchRouter from "@/routes/v1/gurus-pitch";
 import StartupDistrictRouter from "@/routes/v1/startup-district";
+import GoldenStarECellRouter from "@/routes/v1/golden-star-ecell";
 
 const v1Router = express.Router();
 
@@ -21,5 +22,6 @@ v1Router.use("/startup-path-finder", StartupPathFinderRouter);
 v1Router.use("/pitch-x", PitchXRouter);
 v1Router.use("/gurus-pitch", GurusPitchRouter);
 v1Router.use("/startup-district", StartupDistrictRouter);
+v1Router.use("/golden-star-ecell", GoldenStarECellRouter);
 
 export default v1Router;

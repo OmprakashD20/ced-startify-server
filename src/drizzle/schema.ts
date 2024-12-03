@@ -280,6 +280,48 @@ export const StartupDistrictMemberTable = pgTable("startup_district_members", {
   phone: varchar("phone").notNull(),
 });
 
+export const GoldenStarECellAwardTable = pgTable("golden_star_ecell_award", {
+  id: varchar("id").primaryKey(),
+  region: text("region").notNull(),
+  state: text("state"),
+  district: text("district"),
+  country: text("country"),
+  institutionType: text("institution_type"),
+  participateInDistrictLevel: boolean("participate_in_district_level"),
+  numberOfAwards: text("number_of_awards").notNull(),
+  selectedAwards: text("selected_awards").array(),
+  institutionName: varchar("institution_name", { length: 256 }).notNull(),
+  institutionDistrict: varchar("institution_district", {
+    length: 256,
+  }).notNull(),
+  phoneNumber: varchar("phone_number").notNull(),
+  email: varchar("email", { length: 256 }).notNull(),
+  institutionCategory: text("institution_category").notNull(),
+  ecellCoordinatorName: varchar("ecell_coordinator_name").notNull(),
+  ecellCoordinatorEmail: varchar("ecell_coordinator_email", {
+    length: 256,
+  }).notNull(),
+  ecellCoordinatorPhone: varchar("ecell_coordinator_phone").notNull(),
+  ecellStartYear: varchar("ecell_start_year").notNull(),
+  entrepreneurshipFacilities: text("entrepreneurship_facilities").array(),
+  institutionalFunding: varchar("institutional_funding").notNull(),
+  paymentScreenshot: text("payment_screenshot").notNull(),
+  paymentId: varchar("payment_id").notNull(),
+});
+
+export const GoldenStarECellActivityTable = pgTable(
+  "golden_star_ecell_activity",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    type: text("type").notNull(),
+    beneficiaryCount: varchar("beneficiary_count").notNull(),
+    outcomes: text("outcomes").notNull(),
+    proofUrl: text("proof_url").notNull(),
+    ecellId: varchar("ecell_id").references(() => GoldenStarECellAwardTable.id),
+  }
+);
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));
@@ -331,3 +373,20 @@ export const PitchDeckMemberRelations = relations(
 export const PitchDeckRelations = relations(PitchXTable, ({ many }) => ({
   members: many(PitchXMemberTable),
 }));
+
+export const GoldenStarECellAwardRelations = relations(
+  GoldenStarECellAwardTable,
+  ({ many }) => ({
+    activities: many(GoldenStarECellActivityTable),
+  })
+);
+
+export const GoldenStarECellActivityRelations = relations(
+  GoldenStarECellActivityTable,
+  ({ one }) => ({
+    award: one(GoldenStarECellAwardTable, {
+      fields: [GoldenStarECellActivityTable.ecellId],
+      references: [GoldenStarECellAwardTable.id],
+    }),
+  })
+);
