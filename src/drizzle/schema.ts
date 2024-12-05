@@ -238,7 +238,7 @@ export const GurusPitchTable = pgTable("gurus_pitch", {
   startupName: varchar("startup_name").notNull(),
   isStartupRegistered: boolean("is_startup_registered").notNull(),
   yearsLeadingStartup: text("years_leading_startup").notNull(),
-  sdg: text("sdg").notNull(),
+  sdg: text("sdg").array().notNull().default([]),
   startupType: text("startup_type").notNull(),
   sector: text("sector").notNull(),
   pitchDeck: text("pitch_deck").notNull(),
