@@ -322,6 +322,24 @@ export const GoldenStarECellActivityTable = pgTable(
   }
 );
 
+export const FounderFindTable = pgTable("founder_find", {
+  id: varchar("id").primaryKey(),
+  founderType: text("role").notNull(),
+  name: varchar().notNull(),
+  email: varchar().notNull(),
+  phone: varchar().notNull(),
+  currentStatus: text("current_status").notNull(),
+  startupStatus: text("startup_status").notNull(),
+  startupName: text("startup_name"),
+  designation: text("designation"),
+  cityOfOperation: text("city_of_operation").notNull(),
+  startupKeyVertical: text("startup_key_vertical").notNull(),
+  interestedStartupAreas: text("interested_startup_areas").array().notNull(),
+  cofounderCount: text("cofounder_count"),
+  interestedRoles: text("interested_roles").array().notNull(),
+  paymentId: varchar("payment_id").notNull(),
+});
+
 export const StudentRelations = relations(StudentTable, ({ many }) => ({
   startupCafe: many(StartUpCafeTable),
 }));

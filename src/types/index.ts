@@ -60,3 +60,5 @@ export type FounderType = InferResultType<"FounderTable">;
 export type CompanyType = InferResultType<"CompanyTable">;
 export type CoFounderType = InferResultType<"CoFounderTable">;
 export type StartUpMughavariType = InferResultType<"StartupMughavariTable">;
+export type GoldenStarECellAwardType =
+  InferResultType<"GoldenStarECellAwardTable">;
