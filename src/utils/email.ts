@@ -9,12 +9,14 @@ export default async function sendEmail({
   name,
   teamId,
   eventName,
+  link,
 }: {
   to: string;
   subject: string;
   name: string;
   teamId: string;
   eventName: string;
+  link?: string;
 }) {
   return await resend.emails.send({
     from: "Startify 3.0 <confirmation@austartify.com>",
@@ -84,7 +86,13 @@ export default async function sendEmail({
             <strong>Team ID:</strong> ${teamId}
             <br>
             <strong>Status:</strong> <span class="status">Pending</span>
-            <br><br>
+            <br>
+            ${
+              link
+                ? `<strong>Submission Link:</strong> <a href=${link}>Click Here</a>
+            <br><br>`
+                : ""
+            }
             We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.
             <br><br>
             Best Regards, <br>

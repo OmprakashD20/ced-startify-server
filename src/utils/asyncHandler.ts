@@ -31,7 +31,7 @@ export default function AsyncHandler<
     } catch (error: any) {
       console.log(error);
       if (error instanceof HTTPError) next(error);
-      else throw new ServerError();
+      else next(new ServerError());
     }
   };
 }

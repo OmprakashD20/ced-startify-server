@@ -309,19 +309,6 @@ export const GoldenStarECellAwardTable = pgTable("golden_star_ecell_award", {
   paymentId: varchar("payment_id").notNull(),
 });
 
-export const GoldenStarECellActivityTable = pgTable(
-  "golden_star_ecell_activity",
-  {
-    id: serial("id").primaryKey(),
-    name: text("name").notNull(),
-    type: text("type").notNull(),
-    beneficiaryCount: varchar("beneficiary_count").notNull(),
-    outcomes: text("outcomes").notNull(),
-    proofUrl: text("proof_url").notNull(),
-    ecellId: varchar("ecell_id").references(() => GoldenStarECellAwardTable.id),
-  }
-);
-
 export const FounderFindTable = pgTable("founder_find", {
   id: varchar("id").primaryKey(),
   founderType: text("role").notNull(),
@@ -391,20 +378,3 @@ export const PitchDeckMemberRelations = relations(
 export const PitchDeckRelations = relations(PitchXTable, ({ many }) => ({
   members: many(PitchXMemberTable),
 }));
-
-export const GoldenStarECellAwardRelations = relations(
-  GoldenStarECellAwardTable,
-  ({ many }) => ({
-    activities: many(GoldenStarECellActivityTable),
-  })
-);
-
-export const GoldenStarECellActivityRelations = relations(
-  GoldenStarECellActivityTable,
-  ({ one }) => ({
-    award: one(GoldenStarECellAwardTable, {
-      fields: [GoldenStarECellActivityTable.ecellId],
-      references: [GoldenStarECellAwardTable.id],
-    }),
-  })
-);

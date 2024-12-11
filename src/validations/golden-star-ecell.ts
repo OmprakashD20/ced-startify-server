@@ -37,53 +37,6 @@ export const GoldenStarECellAwardsSchema = z.object({
     entrepreneurshipFacilities: z.array(
       z.enum(["Makers Lab", "Incubator", "Others"])
     ),
-    activities: z.object({
-      awarenessPrograms: z.array(
-        z.object({
-          name: z.string().min(1, "Program name is required"),
-          beneficiaryCount: z.string({
-            required_error: "Beneficiary count is required",
-          }),
-          outcomes: z.string().min(1, "Outcomes are required"),
-          proofUrl: z
-            .string()
-            .url({ message: "Invalid drive url" })
-            .describe(
-              "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-            ),
-        })
-      ),
-      workshops: z.array(
-        z.object({
-          name: z.string().min(1, "Workshop name is required"),
-          beneficiaryCount: z.string({
-            required_error: "Beneficiary count is required",
-          }),
-          outcomes: z.string().min(1, "Outcomes are required"),
-          proofUrl: z
-            .string()
-            .url({ message: "Invalid drive url" })
-            .describe(
-              "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-            ),
-        })
-      ),
-      otherEvents: z.array(
-        z.object({
-          name: z.string().min(1, "Event name is required"),
-          beneficiaryCount: z.string({
-            required_error: "Beneficiary count is required",
-          }),
-          outcomes: z.string().min(1, "Outcomes are required"),
-          proofUrl: z
-            .string()
-            .url({ message: "Invalid drive url" })
-            .describe(
-              "Make a document/PDF of geo-tagged photos and upload it in the drive. Paste the drive link here."
-            ),
-        })
-      ),
-    }),
     institutionalFunding: z.string({
       required_error: "Institutional Funding is required",
     }),

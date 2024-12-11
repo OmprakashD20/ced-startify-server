@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import db from "@/drizzle";
 import {
   createGoldenStarECellAward,
-  createGoldenStarECellActivities,
+  getRegisteredInstitutions,
 } from "@/services/golden-star-ecell";
 import sendEmail from "@/utils/email";
 
@@ -13,12 +13,10 @@ export async function createGoldenStarECellAwardController(
   req: Request<{}, {}, GoldenStarECellAwardsSchemaType["body"], {}>,
   _: Response
 ): Promise<{ statusCode: number; message: string }> {
-  const { activities, ...data } = req.body;
+  const { ...data } = req.body;
 
   await db.transaction(async (txn) => {
     const { id: ecellId } = await createGoldenStarECellAward(data, txn);
-
-    await createGoldenStarECellActivities(activities, ecellId, txn);
 
     await sendEmail({
       to: data.ecellCoordinator.email,
@@ -26,11 +24,33 @@ export async function createGoldenStarECellAwardController(
       name: data.ecellCoordinator.name,
       eventName: "Golden Star ECell Award",
       teamId: ecellId,
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSeKm6hvKvbZZE2FDZDOqiEq-G_R-F2KyXV5NmCHJFuDq0OKJg/viewform?usp=sharing",
     });
   });
 
   return {
     statusCode: 201,
     message: "Golden Star ECell Award registration completed successfully.",
+  };
+}
+
+export async function getRegisteredInstitutionsController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  institutions: { institutionName: string }[];
+}> {
+  let institutions = await getRegisteredInstitutions();
+
+  //remove duplicate institutions
+  institutions = institutions.filter(
+    (v, i, a) =>
+      a.findIndex((t) => t.institutionName === v.institutionName) === i
+  );
+
+  return {
+    statusCode: 200,
+    institutions,
   };
 }

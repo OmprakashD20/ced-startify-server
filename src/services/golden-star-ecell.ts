@@ -1,8 +1,8 @@
 import db from "@/drizzle";
 import {
   GoldenStarECellAwardTable,
-  GoldenStarECellActivityTable,
 } from "@/drizzle/schema";
+import { GoldenStarECellAwardType, Prettify } from "@/types";
 import { generateTeamId } from "@/utils";
 import { GoldenStarECellAwardsSchemaType } from "@/validations/golden-star-ecell";
 
@@ -43,37 +43,12 @@ export async function createGoldenStarECellAward(
   return { id: ecellAward.id };
 }
 
-export async function createGoldenStarECellActivities(
-  activities: GoldenStarECellAwardsSchemaType["body"]["activities"],
-  ecellId: string,
+export async function getRegisteredInstitutions(
   txn = db
-): Promise<void> {
-  const activitiesData = [
-    ...activities.awarenessPrograms.map((activity) => ({
-      name: activity.name,
-      type: "Awareness Program",
-      beneficiaryCount: activity.beneficiaryCount,
-      outcomes: activity.outcomes,
-      proofUrl: activity.proofUrl,
-      ecellId,
-    })),
-    ...activities.workshops.map((activity) => ({
-      name: activity.name,
-      type: "Workshop",
-      beneficiaryCount: activity.beneficiaryCount,
-      outcomes: activity.outcomes,
-      proofUrl: activity.proofUrl,
-      ecellId,
-    })),
-    ...activities.otherEvents.map((activity) => ({
-      name: activity.name,
-      type: "Other Event",
-      beneficiaryCount: activity.beneficiaryCount,
-      outcomes: activity.outcomes,
-      proofUrl: activity.proofUrl,
-      ecellId,
-    })),
-  ];
-
-  await txn.insert(GoldenStarECellActivityTable).values(activitiesData);
+): Promise<Prettify<Pick<GoldenStarECellAwardType, "institutionName">>[]> {
+  return txn.query.GoldenStarECellAwardTable.findMany({
+    columns: {
+      institutionName: true,
+    },
+  });
 }
