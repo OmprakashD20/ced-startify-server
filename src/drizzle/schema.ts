@@ -2,7 +2,6 @@ import {
   integer,
   pgTable,
   varchar,
-  uuid,
   text,
   primaryKey,
   boolean,
@@ -12,13 +11,13 @@ import {
 import { relations } from "drizzle-orm";
 
 export const StudentTable = pgTable("students", {
-  id: uuid().defaultRandom().primaryKey(),
+  id: serial().primaryKey(),
   name: varchar({ length: 256 }).notNull(),
-  email: varchar({ length: 256 }).notNull().unique(),
-  phone: varchar({ length: 15 }).notNull(),
+  email: varchar({ length: 256 }).notNull(),
+  phone: varchar().notNull(),
   degree: varchar({ length: 100 }).notNull(),
   department: varchar({ length: 100 }).notNull(),
-  yearOfStudy: varchar("year_of_study", { length: 5 }).notNull(),
+  yearOfStudy: varchar("year_of_study").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -27,7 +26,7 @@ export const StartUpCafeTable = pgTable("startup_cafe", {
   startupName: varchar("startup_name", { length: 256 }).notNull(),
   collegeName: varchar("college_name", { length: 256 }).notNull(),
   collegeEmail: varchar("college_email", { length: 256 }).notNull(),
-  collegePhone: varchar("college_phone", { length: 15 }).notNull(),
+  collegePhone: varchar("college_phone").notNull(),
   sameInstitution: boolean("same_institution").notNull(),
   memberCount: varchar("member_count", { length: 5 }).notNull(),
   sdg: varchar("sdg", { length: 256 }).notNull(),
@@ -44,7 +43,7 @@ export const StartUpCafeTable = pgTable("startup_cafe", {
 export const StudentToStartUpCafeTable = pgTable(
   "student_to_startup_cafe",
   {
-    studentId: uuid("student_id")
+    studentId: serial("student_id")
       .notNull()
       .references(() => StudentTable.id),
     startupCafeId: varchar("startup_cafe_id")
