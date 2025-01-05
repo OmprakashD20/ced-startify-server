@@ -11,13 +11,14 @@ import {
 import { relations } from "drizzle-orm";
 
 export const StudentTable = pgTable("students", {
-  id: serial().primaryKey(),
+  idn: serial("id").primaryKey(),
   name: varchar({ length: 256 }).notNull(),
   email: varchar({ length: 256 }).notNull(),
   phone: varchar().notNull(),
   degree: varchar({ length: 100 }).notNull(),
   department: varchar({ length: 100 }).notNull(),
   yearOfStudy: varchar("year_of_study").notNull(),
+  startupCafeId: varchar({ length: 256 }).notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
@@ -39,23 +40,6 @@ export const StartUpCafeTable = pgTable("startup_cafe", {
     .notNull()
     .$onUpdate(() => new Date()),
 });
-
-export const StudentToStartUpCafeTable = pgTable(
-  "student_to_startup_cafe",
-  {
-    studentId: serial("student_id")
-      .notNull()
-      .references(() => StudentTable.id),
-    startupCafeId: varchar("startup_cafe_id")
-      .notNull()
-      .references(() => StartUpCafeTable.id),
-  },
-  ({ startupCafeId, studentId }) => ({
-    pk: primaryKey({
-      columns: [startupCafeId, studentId],
-    }),
-  })
-);
 
 export const FounderTable = pgTable("founders", {
   id: serial("id").primaryKey(),
@@ -326,8 +310,11 @@ export const FounderFindTable = pgTable("founder_find", {
   paymentId: varchar("payment_id").notNull(),
 });
 
-export const StudentRelations = relations(StudentTable, ({ many }) => ({
-  startupCafe: many(StartUpCafeTable),
+export const StudentRelations = relations(StudentTable, ({ one }) => ({
+  startupCafe: one(StartUpCafeTable, {
+    fields: [StudentTable.startupCafeId],
+    references: [StartUpCafeTable.id],
+  }),
 }));
 
 export const StartUpCafeRelations = relations(StartUpCafeTable, ({ many }) => ({
