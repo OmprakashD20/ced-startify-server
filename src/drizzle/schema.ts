@@ -31,6 +31,7 @@ export const StartUpCafeTable = pgTable("startup_cafe", {
   sameInstitution: boolean("same_institution").notNull(),
   memberCount: varchar("member_count", { length: 5 }).notNull(),
   sdg: varchar("sdg", { length: 256 }).notNull(),
+  skipSubmission: boolean("skip_submission").default(false),
   problemStatement: text("problem_statement").notNull(),
   solution: text("solution").notNull(),
   approved: boolean().default(false),
