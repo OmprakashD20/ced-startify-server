@@ -46,17 +46,15 @@ export const StartUpCafeSchema = z.object({
       .string({
         required_error: "Sustainable Development Goal is required.",
       })
-      .min(2, { message: "Sustainable Development Goal is required." }),
+      .min(1, { message: "Sustainable Development Goal is required." }),
     problemStatement: z
       .string({
         required_error: "Your problem statement is required.",
-      })
-      .max(1000, { message: "Problem statement should not exceed 100 words." }),
+      }),
     solution: z
       .string({
         required_error: "Your solution is required.",
-      })
-      .max(1000, { message: "Solution should not exceed 100 words." }),
+      }),
   }),
 });
 

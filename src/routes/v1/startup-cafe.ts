@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createProjectController } from "@/controllers/startup-cafe";
+import {
+  createProjectController,
+  getCollegesController,
+} from "@/controllers/startup-cafe";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +21,7 @@ StartUpCafeRouter.post(
   createProjectValidator,
   AsyncHandler(createProjectController)
 );
+
+StartUpCafeRouter.get("/colleges", AsyncHandler(getCollegesController));
 
 export default StartUpCafeRouter;

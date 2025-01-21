@@ -9,7 +9,7 @@ type StartUpCafeParams = {
 };
 
 export async function createStartUpCafe(
-  data: Omit<StartUpCafeParams["data"], "approved">,
+  data: Omit<StartUpCafeParams["data"], "approved" | "skipSubmission">,
   txn = db
 ): Promise<{ id: string }> {
   const [startup_cafe] = await txn
@@ -21,4 +21,15 @@ export async function createStartUpCafe(
     .returning();
 
   return { id: startup_cafe.id };
+}
+
+export async function getColleges(): Promise<{ colleges: string[] }> {
+  const colleges = await db
+    .selectDistinct({
+      college: StartUpCafeTable.collegeName,
+    })
+    .from(StartUpCafeTable)
+    .orderBy(StartUpCafeTable.collegeName);
+
+  return { colleges: colleges.map((college) => college.college) };
 }
