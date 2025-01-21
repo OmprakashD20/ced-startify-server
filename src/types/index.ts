@@ -54,8 +54,6 @@ export interface AsyncHandlerReturn<T> {
 
 export type StudentType = InferResultType<"StudentTable">;
 export type StartUpCafeType = InferResultType<"StartUpCafeTable">;
-export type StudentToStartUpCafeType =
-  InferResultType<"StudentToStartUpCafeTable">;
 export type FounderType = InferResultType<"FounderTable">;
 export type CompanyType = InferResultType<"CompanyTable">;
 export type CoFounderType = InferResultType<"CoFounderTable">;

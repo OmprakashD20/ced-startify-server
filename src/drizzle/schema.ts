@@ -11,7 +11,7 @@ import {
 import { relations } from "drizzle-orm";
 
 export const StudentTable = pgTable("students", {
-  idn: serial("id").primaryKey(),
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity({ startWith: 1 }),
   name: varchar({ length: 256 }).notNull(),
   email: varchar({ length: 256 }).notNull(),
   phone: varchar().notNull(),
