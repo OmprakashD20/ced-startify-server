@@ -1,4 +1,6 @@
 import db from "@/drizzle";
+import { eq } from "drizzle-orm";
+
 import { GurusPitchTable, GurusPitchMemberTable } from "@/drizzle/schema";
 import { InferResultType } from "@/types";
 import { generateTeamId } from "@/utils";
@@ -42,6 +44,12 @@ export async function getGurusPitch(): Promise<{
   const gurusPitch = await db.query.GurusPitchTable.findMany({
     with: {
       members: true,
+    },
+    extras: {
+      memberCount: db.$count(
+        GurusPitchMemberTable,
+        eq(GurusPitchMemberTable.gurusPitchId, GurusPitchTable.id)
+      ).as('memberCount'),
     },
   });
 
