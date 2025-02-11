@@ -1,4 +1,6 @@
-import express from "express";
+import express, { Request, Response } from "express";
+
+import colleges from "@/data/colleges.json";
 
 import StartUpCafeRouter from "@/routes/v1/startup-cafe";
 import StartUpMughavariRouter from "@/routes/v1/startup-mughavari";
@@ -11,6 +13,7 @@ import GurusPitchRouter from "@/routes/v1/gurus-pitch";
 import StartupDistrictRouter from "@/routes/v1/startup-district";
 import GoldenStarECellRouter from "@/routes/v1/golden-star-ecell";
 import FounderFindRouter from "@/routes/v1/founder-find";
+import AsyncHandler from "@/utils/asyncHandler";
 
 const v1Router = express.Router();
 
