@@ -3,6 +3,7 @@ import express from "express";
 import {
   createProjectController,
   getCollegesController,
+  getStartupsController,
 } from "@/controllers/startup-cafe";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
@@ -23,5 +24,7 @@ StartUpCafeRouter.post(
 );
 
 StartUpCafeRouter.get("/colleges", AsyncHandler(getCollegesController));
+
+StartUpCafeRouter.get("/startups", AsyncHandler(getStartupsController));
 
 export default StartUpCafeRouter;

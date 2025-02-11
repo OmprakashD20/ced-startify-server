@@ -1,6 +1,6 @@
 import db from "@/drizzle";
 import { StartUpCafeTable } from "@/drizzle/schema";
-import { StartUpCafeType } from "@/types";
+import { InferResultType, StartUpCafeType } from "@/types";
 import { generateTeamId } from "@/utils";
 
 type StartUpCafeParams = {
@@ -32,4 +32,20 @@ export async function getColleges(): Promise<{ colleges: string[] }> {
     .orderBy(StartUpCafeTable.collegeName);
 
   return { colleges: colleges.map((college) => college.college) };
+}
+
+export type GetStartupsType = InferResultType<
+  "StartUpCafeTable",
+  { with: { students: true } }
+>[];
+export async function getStartups(): Promise<{
+  startups: GetStartupsType;
+}> {
+  const startups = await db.query.StartUpCafeTable.findMany({
+    with: {
+      students: true,
+    },
+  });
+
+  return { startups };
 }

@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 
 import db from "@/drizzle";
-import { createStartUpCafe, getColleges } from "@/services/startup-cafe";
+import {
+  createStartUpCafe,
+  getColleges,
+  getStartups,
+  GetStartupsType,
+} from "@/services/startup-cafe";
 import { createStudent } from "@/services/student";
 import { StartUpCafeSchemaType } from "@/validations/startup-cafe";
 import sendEmail from "@/utils/email";
@@ -50,4 +55,13 @@ export async function getCollegesController(
   const { colleges } = await getColleges();
 
   return { colleges, statusCode: 200 };
+}
+
+export async function getStartupsController(
+  _req: Request,
+  _res: Response
+): Promise<{ startups: GetStartupsType; statusCode: number }> {
+  const { startups } = await getStartups();
+
+  return { startups, statusCode: 200 };
 }
