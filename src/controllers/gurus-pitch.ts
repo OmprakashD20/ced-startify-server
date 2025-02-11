@@ -45,5 +45,10 @@ export async function getGurusPitchController(
 ): Promise<{ gurusPitch: GetGuruPitchType; statusCode: number }> {
   const { gurusPitch } = await getGurusPitch();
 
-  return { gurusPitch, statusCode: 200 };
+  const result = gurusPitch.map((e) => ({
+    ...e,
+    memberCount: e.members.length,
+  }));
+
+  return { gurusPitch: result, statusCode: 200 };
 }
