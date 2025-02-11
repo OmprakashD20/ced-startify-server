@@ -26,4 +26,12 @@ v1Router.use("/founder-find", FounderFindRouter);
 v1Router.use("/startup-district", StartupDistrictRouter);
 v1Router.use("/golden-star-ecell", GoldenStarECellRouter);
 
+v1Router.get(
+  "/colleges",
+  AsyncHandler(async (_: Request, __: Response) => ({
+    statusCode: 200,
+    colleges,
+  }))
+);
+
 export default v1Router;
