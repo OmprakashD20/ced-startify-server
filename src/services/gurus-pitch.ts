@@ -45,12 +45,6 @@ export async function getGurusPitch(): Promise<{
     with: {
       members: true,
     },
-    extras: {
-      memberCount: db.$count(
-        GurusPitchMemberTable,
-        eq(GurusPitchMemberTable.gurusPitchId, GurusPitchTable.id)
-      ).as('memberCount'),
-    },
   });
 
   return { gurusPitch };
