@@ -365,3 +365,17 @@ export const PitchDeckMemberRelations = relations(
 export const PitchDeckRelations = relations(PitchXTable, ({ many }) => ({
   members: many(PitchXMemberTable),
 }));
+
+export const GurusPitchMemberRelations = relations(
+  GurusPitchMemberTable,
+  ({ one }) => ({
+    pitchDeck: one(GurusPitchTable, {
+      fields: [GurusPitchMemberTable.gurusPitchId],
+      references: [GurusPitchTable.id],
+    }),
+  })
+);
+
+export const GurusPitchRelations = relations(GurusPitchTable, ({ many }) => ({
+  members: many(GurusPitchMemberTable),
+}));
