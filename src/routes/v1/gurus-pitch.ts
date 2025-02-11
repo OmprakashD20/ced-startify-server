@@ -22,6 +22,6 @@ GurusPitchRouter.post(
   AsyncHandler(createGurusPitchController)
 );
 
-GurusPitchRouter.get("pitches", AsyncHandler(getGurusPitchController));
+GurusPitchRouter.get("/gurus-pitches", AsyncHandler(getGurusPitchController));
 
 export default GurusPitchRouter;
