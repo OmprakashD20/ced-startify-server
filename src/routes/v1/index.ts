@@ -1,7 +1,5 @@
 import express, { Request, Response } from "express";
 
-import colleges from "@/data/colleges.json";
-
 import StartUpCafeRouter from "@/routes/v1/startup-cafe";
 import StartUpMughavariRouter from "@/routes/v1/startup-mughavari";
 import InternHuntRouter from "@/routes/v1/intern-hunt";
@@ -13,7 +11,6 @@ import GurusPitchRouter from "@/routes/v1/gurus-pitch";
 import StartupDistrictRouter from "@/routes/v1/startup-district";
 import GoldenStarECellRouter from "@/routes/v1/golden-star-ecell";
 import FounderFindRouter from "@/routes/v1/founder-find";
-import AsyncHandler from "@/utils/asyncHandler";
 
 const v1Router = express.Router();
 
@@ -28,13 +25,5 @@ v1Router.use("/gurus-pitch", GurusPitchRouter);
 v1Router.use("/founder-find", FounderFindRouter);
 v1Router.use("/startup-district", StartupDistrictRouter);
 v1Router.use("/golden-star-ecell", GoldenStarECellRouter);
-
-v1Router.get(
-  "/colleges",
-  AsyncHandler(async (_: Request, __: Response) => ({
-    statusCode: 200,
-    colleges,
-  }))
-);
 
 export default v1Router;
