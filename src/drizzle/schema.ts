@@ -369,7 +369,7 @@ export const PitchDeckRelations = relations(PitchXTable, ({ many }) => ({
 export const GurusPitchMemberRelations = relations(
   GurusPitchMemberTable,
   ({ one }) => ({
-    pitchDeck: one(GurusPitchTable, {
+    gurusPitch: one(GurusPitchTable, {
       fields: [GurusPitchMemberTable.gurusPitchId],
       references: [GurusPitchTable.id],
     }),
@@ -378,4 +378,18 @@ export const GurusPitchMemberRelations = relations(
 
 export const GurusPitchRelations = relations(GurusPitchTable, ({ many }) => ({
   members: many(GurusPitchMemberTable),
+}));
+
+export const StartupDistrictMemberRelations = relations(
+  StartupDistrictMemberTable,
+  ({ one }) => ({
+    startupDistrict: one(StartupDistrictTable, {
+      fields: [StartupDistrictMemberTable.startupDistrictId],
+      references: [StartupDistrictTable.id],
+    }),
+  })
+);
+
+export const StartupDistrictRelations = relations(StartupDistrictTable, ({ many }) => ({
+  members: many(StartupDistrictMemberTable),
 }));

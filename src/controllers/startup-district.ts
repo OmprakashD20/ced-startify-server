@@ -3,6 +3,8 @@ import db from "@/drizzle";
 import {
   createStartupDistrict,
   createStartupDistrictMember,
+  getStartupDistricts,
+  GetStartupDistrictsType,
 } from "@/services/startup-district";
 import { StartupDistrictSchemaType } from "@/validations/startup-district";
 import sendEmail from "@/utils/email";
@@ -34,4 +36,18 @@ export async function createStartupDistrictController(
     statusCode: 201,
     message: "Startup District registration completed successfully.",
   };
+}
+
+export async function getStartupDistrictsController(
+  _req: Request,
+  _res: Response
+): Promise<{ startupDistricts: GetStartupDistrictsType; statusCode: number }> {
+  const { startupDistricts } = await getStartupDistricts();
+
+  const result = startupDistricts.map((e) => ({
+    ...e,
+    memberCount: e.members.length,
+  }));
+
+  return { startupDistricts: result, statusCode: 200 };
 }

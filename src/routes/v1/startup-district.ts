@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createStartupDistrictController } from "@/controllers/startup-district";
+import {
+  createStartupDistrictController,
+  getStartupDistrictsController,
+} from "@/controllers/startup-district";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -17,6 +20,11 @@ StartupDistrictRouter.post(
   "/create-project",
   createProjectValidator,
   AsyncHandler(createStartupDistrictController)
+);
+
+StartupDistrictRouter.get(
+  "/startups",
+  AsyncHandler(getStartupDistrictsController)
 );
 
 export default StartupDistrictRouter;
