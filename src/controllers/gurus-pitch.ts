@@ -4,6 +4,8 @@ import db from "@/drizzle";
 import {
   createGurusPitch,
   createGurusPitchMember,
+  GetGuruPitchType,
+  getGurusPitch,
 } from "@/services/gurus-pitch";
 import { GurusPitchSchemaType } from "@/validations/gurus-pitch";
 import sendEmail from "@/utils/email";
@@ -35,4 +37,13 @@ export async function createGurusPitchController(
     statusCode: 201,
     message: "Gurus Pitch registration completed successfully.",
   };
+}
+
+export async function getGurusPitchController(
+  _req: Request,
+  _res: Response
+): Promise<{ gurusPitch: GetGuruPitchType; statusCode: number }> {
+  const { gurusPitch } = await getGurusPitch();
+
+  return { gurusPitch, statusCode: 200 };
 }

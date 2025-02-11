@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createGurusPitchController } from "@/controllers/gurus-pitch";
+import {
+  createGurusPitchController,
+  getGurusPitchController,
+} from "@/controllers/gurus-pitch";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +21,7 @@ GurusPitchRouter.post(
   createProjectValidator,
   AsyncHandler(createGurusPitchController)
 );
+
+GurusPitchRouter.get("gurus-pitch", AsyncHandler(getGurusPitchController));
 
 export default GurusPitchRouter;

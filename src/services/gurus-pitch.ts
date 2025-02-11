@@ -1,5 +1,6 @@
 import db from "@/drizzle";
 import { GurusPitchTable, GurusPitchMemberTable } from "@/drizzle/schema";
+import { InferResultType } from "@/types";
 import { generateTeamId } from "@/utils";
 import {
   GurusPitchSchemaType,
@@ -27,4 +28,22 @@ export async function createGurusPitchMember(
   txn = db
 ): Promise<void> {
   await txn.insert(GurusPitchMemberTable).values(data);
+}
+
+export type GetGuruPitchType = InferResultType<
+  "GurusPitchTable",
+  {
+    with: { members: true };
+  }
+>[];
+export async function getGurusPitch(): Promise<{
+  gurusPitch: GetGuruPitchType;
+}> {
+  const gurusPitch = await db.query.GurusPitchTable.findMany({
+    with: {
+      members: true,
+    },
+  });
+
+  return { gurusPitch };
 }
