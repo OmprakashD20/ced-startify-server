@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createFounderFindController } from "@/controllers/founder-find";
+import {
+  createFounderFindController,
+  getFoundersController,
+} from "@/controllers/founder-find";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -15,8 +18,10 @@ const { validator: createFounderFindValidator } =
 
 FounderFindRouter.post(
   "/create-founder",
-  createFounderFindValidator, 
-  AsyncHandler(createFounderFindController) 
+  createFounderFindValidator,
+  AsyncHandler(createFounderFindController)
 );
+
+FounderFindRouter.get("/founders", AsyncHandler(getFoundersController));
 
 export default FounderFindRouter;

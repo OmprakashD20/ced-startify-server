@@ -2,7 +2,11 @@ import { Request, Response } from "express";
 
 import db from "@/drizzle";
 import { FounderFindSchemaType } from "@/validations/founder-find";
-import { createFounderFind } from "@/services/founder-find";
+import {
+  createFounderFind,
+  getFounders,
+  GetFoundersType,
+} from "@/services/founder-find";
 import sendEmail from "@/utils/email";
 
 export async function createFounderFindController(
@@ -30,4 +34,13 @@ export async function createFounderFindController(
     statusCode: 201,
     message: "Founder Find registration completed successfully.",
   };
+}
+
+export async function getFoundersController(
+  _req: Request,
+  _res: Response
+): Promise<{ founders: GetFoundersType; statusCode: number }> {
+  const { founders } = await getFounders();
+
+  return { founders, statusCode: 200 };
 }
