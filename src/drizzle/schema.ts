@@ -54,7 +54,7 @@ export const CompanyTable = pgTable("companies", {
   name: varchar("name", { length: 256 }).notNull(),
   address: text("address").notNull(),
   type: varchar("type", { length: 256 }).notNull(),
-  sector: varchar("sector", { length: 256 }).notNull(),
+  sector: text("sector").notNull(),
   founderId: integer("founder_id").references(() => FounderTable.id),
   hasCoFounders: boolean("has_co_founders").default(false),
 });
