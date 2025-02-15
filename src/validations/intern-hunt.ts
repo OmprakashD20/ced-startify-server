@@ -32,7 +32,7 @@ export const InternHuntStartupSchema = z.object({
   ]),
   otherInternshipRole: z.string().optional(),
   preferredSkills: z.string().min(1, "Preferred skills are required"),
-  internshipPositions: z.string().min(1, "Number of positions is required"),
+  internshipPositions: z.number().min(1, "Number of positions is required"),
   internshipDuration: z.enum([
     "Less than 1 month",
     "1-3 months",
