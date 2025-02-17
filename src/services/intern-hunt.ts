@@ -18,7 +18,6 @@ export async function createStartup(
     .values({
       id: generateTeamId("IHSU"),
       ...data,
-      internshipPositions: parseInt(data.internshipPositions),
     })
     .returning();
 
