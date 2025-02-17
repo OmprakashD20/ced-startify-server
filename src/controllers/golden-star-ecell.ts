@@ -3,11 +3,13 @@ import { Request, Response } from "express";
 import db from "@/drizzle";
 import {
   createGoldenStarECellAward,
+  getECellEntries,
   getRegisteredInstitutions,
 } from "@/services/golden-star-ecell";
 import sendEmail from "@/utils/email";
 
 import { GoldenStarECellAwardsSchemaType } from "@/validations/golden-star-ecell";
+import { GoldenStarECellAwardType } from "@/types";
 
 export async function createGoldenStarECellAwardController(
   req: Request<{}, {}, GoldenStarECellAwardsSchemaType["body"], {}>,
@@ -52,5 +54,20 @@ export async function getRegisteredInstitutionsController(
   return {
     statusCode: 200,
     institutions,
+  };
+}
+
+export async function getECellEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: GoldenStarECellAwardType[];
+}> {
+  let { entries } = await getECellEntries();
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import db from "@/drizzle";
 import { StartupPathFinderSchemaType } from "@/validations/startup-path-finder";
-import { createStartupPathFinder } from "@/services/startup-path-finder";
+import { createStartupPathFinder, getEntries, PathFinderType } from "@/services/startup-path-finder";
 import sendEmail from "@/utils/email";
 
 export async function createStartupPathFinderController(
@@ -26,5 +26,20 @@ export async function createStartupPathFinderController(
   return {
     statusCode: 201,
     message: "Startup PathFinder registration completed successfully.",
+  };
+}
+
+export async function getEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: PathFinderType[];
+}> {
+  let { entries } = await getEntries();
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }

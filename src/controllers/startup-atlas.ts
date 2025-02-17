@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 
 import db from "@/drizzle";
-import { createStartup } from "@/services/startup-atlas";
+import {
+  createStartup,
+  getEntries,
+  StartupAtlasType,
+} from "@/services/startup-atlas";
 import { StartupAtlasSchemaType } from "@/validations/startup-atlas";
 import sendEmail from "@/utils/email";
 
@@ -29,5 +33,20 @@ export async function createStartupAtlasProjectController(
   return {
     statusCode: 201,
     message: "Startup Atlas registration completed successfully.",
+  };
+}
+
+export async function getEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: StartupAtlasType[];
+}> {
+  let { entries } = await getEntries();
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import db from "@/drizzle";
 import { ScholarSpinoffSchemaType } from "@/validations/scholar-spinoff";
-import { createScholarSpinoff } from "@/services/scholar-spinoff";
+import { createScholarSpinoff, getEntries, ScholarSpinoffType } from "@/services/scholar-spinoff";
 import sendEmail from "@/utils/email";
 
 export async function createScholarSpinoffController(
@@ -29,5 +29,20 @@ export async function createScholarSpinoffController(
   return {
     statusCode: 201,
     message: "Scholar Spinoff registration completed successfully.",
+  };
+}
+
+export async function getEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: ScholarSpinoffType[];
+}> {
+  let { entries } = await getEntries();
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }

@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createStartupPathFinderController } from "@/controllers/startup-path-finder";
+import { createStartupPathFinderController, getEntriesController } from "@/controllers/startup-path-finder";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +18,7 @@ StartupPathFinderRouter.post(
   createStartupPathFinderValidator,
   AsyncHandler(createStartupPathFinderController)
 );
+
+StartupPathFinderRouter.get("/entries", AsyncHandler(getEntriesController));
 
 export default StartupPathFinderRouter;

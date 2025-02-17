@@ -1,5 +1,6 @@
 import db from "@/drizzle";
 import { StartupAtlasTable } from "@/drizzle/schema";
+import { InferResultType } from "@/types";
 import { generateTeamId } from "@/utils";
 import { StartupAtlasSchemaType } from "@/validations/startup-atlas";
 
@@ -29,4 +30,12 @@ export async function createStartup(
     .returning();
 
   return { id: startup.id };
+}
+
+export type StartupAtlasType = InferResultType<"StartupAtlasTable">;
+
+export async function getEntries(): Promise<{ entries: StartupAtlasType[] }> {
+  const entries = await db.query.StartupAtlasTable.findMany();
+
+  return { entries };
 }

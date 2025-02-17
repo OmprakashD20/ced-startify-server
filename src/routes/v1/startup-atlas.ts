@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createStartupAtlasProjectController } from "@/controllers/startup-atlas";
+import {
+  createStartupAtlasProjectController,
+  getEntriesController,
+} from "@/controllers/startup-atlas";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +21,7 @@ StartupAtlasRouter.post(
   createProjectValidator,
   AsyncHandler(createStartupAtlasProjectController)
 );
+
+StartupAtlasRouter.get("/entries", AsyncHandler(getEntriesController));
 
 export default StartupAtlasRouter;

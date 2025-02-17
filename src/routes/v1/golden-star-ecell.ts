@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createGoldenStarECellAwardController,
+  getECellEntriesController,
   getRegisteredInstitutionsController,
 } from "@/controllers/golden-star-ecell";
 import AsyncHandler from "@/utils/asyncHandler";
@@ -26,6 +27,11 @@ GoldenStarECellRouter.post(
 GoldenStarECellRouter.get(
   "/institutions",
   AsyncHandler(getRegisteredInstitutionsController)
+);
+
+GoldenStarECellRouter.get(
+  "/entries",
+  AsyncHandler(getECellEntriesController)
 );
 
 export default GoldenStarECellRouter;

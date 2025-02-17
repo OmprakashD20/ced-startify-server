@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createScholarSpinoffController } from "@/controllers/scholar-spinoff";
+import { createScholarSpinoffController, getEntriesController } from "@/controllers/scholar-spinoff";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +18,7 @@ ScholarSpinoffRouter.post(
   createScholarSpinoffValidator,
   AsyncHandler(createScholarSpinoffController)
 );
+
+ScholarSpinoffRouter.get("/entries", AsyncHandler(getEntriesController));
 
 export default ScholarSpinoffRouter;

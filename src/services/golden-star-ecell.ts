@@ -1,7 +1,5 @@
 import db from "@/drizzle";
-import {
-  GoldenStarECellAwardTable,
-} from "@/drizzle/schema";
+import { GoldenStarECellAwardTable } from "@/drizzle/schema";
 import { GoldenStarECellAwardType, Prettify } from "@/types";
 import { generateTeamId } from "@/utils";
 import { GoldenStarECellAwardsSchemaType } from "@/validations/golden-star-ecell";
@@ -45,10 +43,18 @@ export async function createGoldenStarECellAward(
 
 export async function getRegisteredInstitutions(
   txn = db
-): Promise<Prettify<Pick<GoldenStarECellAwardType, "institutionName">>[]> {
+): Promise<Pick<GoldenStarECellAwardType, "institutionName">[]> {
   return txn.query.GoldenStarECellAwardTable.findMany({
     columns: {
       institutionName: true,
     },
   });
+}
+
+export async function getECellEntries(): Promise<{
+  entries: GoldenStarECellAwardType[];
+}> {
+  const entries = await db.query.GoldenStarECellAwardTable.findMany();
+
+  return { entries };
 }
