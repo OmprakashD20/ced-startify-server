@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import db from "@/drizzle";
-import { createPitchX, createPitchXMember } from "@/services/pitch-x";
+import {
+  createPitchX,
+  createPitchXMember,
+  getEntries,
+  PitchXType,
+} from "@/services/pitch-x";
 import { PitchXSchemaType } from "@/validations/pitch-x";
 import sendEmail from "@/utils/email";
 
@@ -30,5 +35,20 @@ export async function createPitchXController(
   return {
     statusCode: 201,
     message: "Pitch X registration completed successfully.",
+  };
+}
+
+export async function getEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: PitchXType[];
+}> {
+  let { entries } = await getEntries();
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }

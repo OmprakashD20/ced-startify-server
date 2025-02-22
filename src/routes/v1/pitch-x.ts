@@ -1,6 +1,9 @@
 import express from "express";
 
-import { createPitchXController } from "@/controllers/pitch-x";
+import {
+  createPitchXController,
+  getEntriesController,
+} from "@/controllers/pitch-x";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import { PitchXSchema, PitchXSchemaType } from "@/validations/pitch-x";
@@ -15,5 +18,7 @@ PitchXRouter.post(
   createProjectValidator,
   AsyncHandler(createPitchXController)
 );
+
+PitchXRouter.get("/entries", AsyncHandler(getEntriesController));
 
 export default PitchXRouter;

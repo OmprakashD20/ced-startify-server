@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createInternHuntController } from "@/controllers/intern-hunt";
+import { createInternHuntController, getStartupEntriesController, getStudentEntriesController } from "@/controllers/intern-hunt";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +18,9 @@ InternHuntRouter.post(
   createProjectValidator,
   AsyncHandler(createInternHuntController)
 );
+
+InternHuntRouter.get("/student-entries", AsyncHandler(getStudentEntriesController));
+
+InternHuntRouter.get("/startup-entries", AsyncHandler(getStartupEntriesController));
 
 export default InternHuntRouter;

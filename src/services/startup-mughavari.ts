@@ -10,6 +10,7 @@ import {
   CompanyType,
   CoFounderType,
   StartUpMughavariType,
+  InferResultType,
 } from "@/types";
 import { generateTeamId } from "@/utils";
 
@@ -78,4 +79,34 @@ export async function createStartUpMughavari(
     .returning();
 
   return { id: startup.id };
+}
+
+export type StartupMughavariCofounder = InferResultType<"CoFounderTable">;
+export type StartupMughavariType = InferResultType<
+  "StartupMughavariTable",
+  {
+    with: {
+      company: {
+        with: {
+          founder: true;
+          coFounders: true;
+        };
+      };
+    };
+  }
+>;
+
+export async function getEntries(): Promise<{ entries: StartupMughavariType[] }> {
+  const entries = await db.query.StartupMughavariTable.findMany({
+    with: {
+      company: {
+        with: {
+          founder: true,
+          coFounders: true,
+        },
+      },
+    },
+  });
+
+  return { entries };
 }

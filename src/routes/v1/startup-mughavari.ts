@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createProjectController } from "@/controllers/startup-mughavari";
+import { createProjectController, getEntriesController } from "@/controllers/startup-mughavari";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
@@ -18,5 +18,7 @@ StartUpMughavariRouter.post(
   createProjectValidator,
   AsyncHandler(createProjectController)
 );
+
+StartUpMughavariRouter.get("/entries", AsyncHandler(getEntriesController));
 
 export default StartUpMughavariRouter;

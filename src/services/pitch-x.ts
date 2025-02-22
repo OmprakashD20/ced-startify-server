@@ -5,6 +5,7 @@ import {
   PitchXSchemaType,
 } from "@/validations/pitch-x";
 import { generateTeamId } from "@/utils";
+import { InferResultType } from "@/types";
 
 export async function createPitchX(
   data: Omit<PitchXSchemaType["body"], "teamMembers">,
@@ -28,4 +29,18 @@ export async function createPitchXMember(
   const [member] = await txn.insert(PitchXMemberTable).values(data).returning();
 
   return { id: member.id };
+}
+
+export type PitchXType = InferResultType<
+  "PitchXTable",
+  { with: { members: true } }
+>;
+export async function getEntries(): Promise<{ entries: PitchXType[] }> {
+  const entries = await db.query.PitchXTable.findMany({
+    with: {
+      members: true,
+    },
+  });
+
+  return { entries };
 }

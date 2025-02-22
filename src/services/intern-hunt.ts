@@ -3,6 +3,7 @@ import {
   InternHuntStartupTable,
   InternHuntStudentTable,
 } from "@/drizzle/schema";
+import { InferResultType } from "@/types";
 import { generateTeamId } from "@/utils";
 import {
   InternHuntStartupSchemaType,
@@ -37,4 +38,23 @@ export async function createStudent(
     .returning();
 
   return { id: student.id };
+}
+
+export type InternHuntStartupType = InferResultType<"InternHuntStartupTable">;
+export type InternHuntStudentType = InferResultType<"InternHuntStudentTable">;
+
+export async function getStartupEntries(): Promise<{
+  entries: InternHuntStartupType[];
+}> {
+  const entries = await db.query.InternHuntStartupTable.findMany();
+
+  return { entries };
+}
+
+export async function getStudentEntries(): Promise<{
+  entries: InternHuntStudentType[];
+}> {
+  const entries = await db.query.InternHuntStudentTable.findMany();
+
+  return { entries };
 }

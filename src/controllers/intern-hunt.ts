@@ -6,7 +6,14 @@ import {
   InternHuntStartupSchemaType,
   InternHuntStudentSchemaType,
 } from "@/validations/intern-hunt";
-import { createStartup, createStudent } from "@/services/intern-hunt";
+import {
+  createStartup,
+  createStudent,
+  getStartupEntries,
+  getStudentEntries,
+  InternHuntStartupType,
+  InternHuntStudentType,
+} from "@/services/intern-hunt";
 import sendEmail from "@/utils/email";
 
 export async function createInternHuntController(
@@ -50,5 +57,66 @@ export async function createInternHuntController(
   return {
     statusCode: 201,
     message: "Intern Hunt registration completed successfully.",
+  };
+}
+
+export async function getStartupEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: Omit<
+    InternHuntStartupType,
+    "otherIndustryDomain" | "otherInternshipRole"
+  >[];
+}> {
+  let { entries } = await getStartupEntries();
+
+  entries = entries.map((entry) => ({
+    ...entry,
+    industryDomain:
+      entry.industryDomain === "Other"
+        ? entry.otherIndustryDomain!
+        : entry.industryDomain,
+    internshipRoles:
+      entry.internshipRoles === "Other"
+        ? entry.otherInternshipRole!
+        : entry.internshipRoles,
+  }));
+
+  return {
+    statusCode: 200,
+    entries,
+  };
+}
+
+export async function getStudentEntriesController(
+  _: Request,
+  __: Response
+): Promise<{
+  statusCode: number;
+  entries: Omit<
+    InternHuntStudentType,
+    "otherPreferredDomain" | "otherPreferredStartupType" | "otherSkills"
+  >[];
+}> {
+  let { entries } = await getStudentEntries();
+
+  entries = entries.map((entry) => ({
+    ...entry,
+    skills: entry.skills === "Other" ? entry.otherSkills! : entry.skills,
+    preferredDomain:
+      entry.preferredDomain === "Other"
+        ? entry.otherPreferredDomain!
+        : entry.preferredDomain,
+    preferredStartupType:
+      entry.preferredStartupType === "Other"
+        ? entry.otherPreferredStartupType!
+        : entry.preferredStartupType,
+  }));
+
+  return {
+    statusCode: 200,
+    entries,
   };
 }
