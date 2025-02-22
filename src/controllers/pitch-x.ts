@@ -26,9 +26,16 @@ export async function createPitchXController(
     await sendEmail({
       to: data.email,
       subject: "Pitch X application submitted",
-      name: data.name,
-      teamId: pitchXId,
-      eventName: "Pitch X",
+      header: "Pitch X",
+      content: `Dear ${data.name},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Pitch X". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${pitchXId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
     });
   });
 

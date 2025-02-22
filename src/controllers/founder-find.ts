@@ -22,10 +22,17 @@ export async function createFounderFindController(
     const { id } = await createFounderFind(data, txn);
 
     await sendEmail({
-      eventName: "Founder Find",
-      name: data.name,
-      subject: "Founder Find Registration Submitted",
-      teamId: id,
+      header: "Founder Find",
+      content: `Dear ${data.name},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Founder Find". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${id}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br> 
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`, 
+      subject: "Founder Find Registration Submitted", 
       to: data.email,
     });
   });

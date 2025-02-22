@@ -33,9 +33,16 @@ export async function createInternHuntController(
       await sendEmail({
         to: data.email,
         subject: "Intern Hunt Startup Created",
-        name: founderName,
-        teamId: startupId,
-        eventName: "Intern Hunt Startup",
+        header: "Intern Hunt Startup",
+        content: `Dear ${founderName},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Intern Hunt Startup". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${startupId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
       });
     } else if (userType === "student") {
       const { fullName } = data as InternHuntStudentSchemaType;
@@ -46,10 +53,17 @@ export async function createInternHuntController(
 
       await sendEmail({
         to: data.email,
-        subject: "Intern Hunt Student Registration Complete",
-        name: fullName,
-        teamId: studentId,
-        eventName: "Intern Hunt Student",
+        subject: "Intern Hunt Student Registration Complete", 
+        header: "Intern Hunt Student",
+        content: `Dear ${fullName},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Intern Hunt Student". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${studentId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br> 
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
       });
     }
   });

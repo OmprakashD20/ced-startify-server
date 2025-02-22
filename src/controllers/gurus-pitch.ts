@@ -27,9 +27,16 @@ export async function createGurusPitchController(
     await sendEmail({
       to: data.facultyEmail,
       subject: "Gurus Pitch application submitted",
-      name: data.facultyName,
-      teamId: gurusPitchId,
-      eventName: "Gurus Pitch",
+      header: "Gurus Pitch",
+      content: `Dear ${data.facultyName},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Gurus Pitch". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${gurusPitchId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
     });
   });
 

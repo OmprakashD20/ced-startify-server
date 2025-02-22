@@ -2,6 +2,7 @@ import db from "@/drizzle";
 import { StartUpCafeTable } from "@/drizzle/schema";
 import { InferResultType, StartUpCafeType } from "@/types";
 import { generateTeamId } from "@/utils";
+import { eq } from "drizzle-orm";
 
 type StartUpCafeParams = {
   id: StartUpCafeType["id"];
@@ -48,4 +49,33 @@ export async function getStartups(): Promise<{
   });
 
   return { startups };
+}
+
+export async function getStartupCafe(id: string, txn = db) {
+  return await txn.query.StartUpCafeTable.findFirst({
+    where: eq(StartUpCafeTable.id, id),
+    with: { students: true },
+  });
+}
+
+export async function updateStartupCafe(
+  data: StartUpCafeParams["data"],
+  id: StartUpCafeParams["id"],
+  txn = db
+) {
+  await txn
+    .update(StartUpCafeTable)
+    .set(data)
+    .where(eq(StartUpCafeTable.id, id));
+}
+
+export async function approveStartupCafe(
+  data: Pick<StartUpCafeParams["data"], "approved">,
+  id: StartUpCafeParams["id"],
+  txn = db
+) {
+  await txn
+    .update(StartUpCafeTable)
+    .set(data)
+    .where(eq(StartUpCafeTable.id, id));
 }

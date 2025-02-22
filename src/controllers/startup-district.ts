@@ -26,9 +26,16 @@ export async function createStartupDistrictController(
     await sendEmail({
       to: data.founderEmail,
       subject: "Startup District Application Submitted",
-      name: data.founderName,
-      teamId: startupDistrictId,
-      eventName: "Startup District",
+      header: "Startup District",
+      content: `Dear ${data.founderName},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Startup District". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${startupDistrictId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
     });
   });
 

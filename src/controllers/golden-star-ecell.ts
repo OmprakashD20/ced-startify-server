@@ -8,6 +8,9 @@ import {
 } from "@/services/golden-star-ecell";
 import sendEmail from "@/utils/email";
 
+const link =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeKm6hvKvbZZE2FDZDOqiEq-G_R-F2KyXV5NmCHJFuDq0OKJg/viewform?usp=sharing";
+
 import { GoldenStarECellAwardsSchemaType } from "@/validations/golden-star-ecell";
 import { GoldenStarECellAwardType } from "@/types";
 
@@ -23,10 +26,17 @@ export async function createGoldenStarECellAwardController(
     await sendEmail({
       to: data.ecellCoordinator.email,
       subject: "Golden Star ECell Award registration completed",
-      name: data.ecellCoordinator.name,
-      eventName: "Golden Star ECell Award",
-      teamId: ecellId,
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSeKm6hvKvbZZE2FDZDOqiEq-G_R-F2KyXV5NmCHJFuDq0OKJg/viewform?usp=sharing",
+      header: "Golden Star ECell Award",
+      content: `Dear ${data.ecellCoordinator.name},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Golden Star ECell Award". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${ecellId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br><strong>Submission Link:</strong> <a href=${link}>Click Here</a>
+            <br><br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
     });
   });
 

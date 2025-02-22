@@ -6,17 +6,13 @@ const resend = new Resend(config.env.RESEND_API_KEY);
 export default async function sendEmail({
   to,
   subject,
-  name,
-  teamId,
-  eventName,
-  link,
+  content,
+  header,
 }: {
   to: string;
   subject: string;
-  name: string;
-  teamId: string;
-  eventName: string;
-  link?: string;
+  content: string;
+  header: string;
 }) {
   return await resend.emails.send({
     from: "Startify 3.0 <confirmation@austartify.com>",
@@ -77,23 +73,9 @@ export default async function sendEmail({
 </head>
 <body>
     <div class="email-container">
-        <div class="header">Application Submitted Successfully</div>
+        <div class="header">${header}</div>
         <div class="content">
-            Dear ${name},
-            <br><br>
-            Thank you for submitting your application for AU Startify 3.0 - ${eventName}. We are currently reviewing your details.
-            <br><br>
-            <strong>Team ID:</strong> ${teamId}
-            <br>
-            <strong>Status:</strong> <span class="status">Pending</span>
-            <br>
-            ${
-              link
-                ? `<strong>Submission Link:</strong> <a href=${link}>Click Here</a>
-            <br><br>`
-                : ""
-            }
-            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.
+            ${content}
             <br><br>
             Best Regards, <br>
             The AU Startify Team

@@ -40,9 +40,16 @@ export async function createProjectController(
     await sendEmail({
       to: founder.email,
       subject: "Application submitted successfully",
-      name: founder.name,
-      teamId: startupMughavariId,
-      eventName: "Startup Mughavari",
+      header: "Startup Mughavari",
+      content: `Dear ${founder.name},
+            <br><br>
+            Thank you for submitting your application for AU Startify 3.0 - "Startup Mughavari". We are currently reviewing your details.
+            <br><br>
+            <strong>Team ID:</strong> ${startupMughavariId}
+            <br>
+            <strong>Status:</strong> <span class="status">Pending</span>
+            <br>
+            We will notify you once your application status changes. If you have any questions in the meantime, feel free to reach out to our support team.`,
     });
   });
 

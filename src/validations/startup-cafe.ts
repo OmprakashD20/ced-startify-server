@@ -47,15 +47,46 @@ export const StartUpCafeSchema = z.object({
         required_error: "Sustainable Development Goal is required.",
       })
       .min(1, { message: "Sustainable Development Goal is required." }),
-    problemStatement: z
-      .string({
-        required_error: "Your problem statement is required.",
-      }),
-    solution: z
-      .string({
-        required_error: "Your solution is required.",
-      }),
+    problemStatement: z.string({
+      required_error: "Your problem statement is required.",
+    }),
+    solution: z.string({
+      required_error: "Your solution is required.",
+    }),
   }),
 });
 
 export type StartUpCafeSchemaType = z.infer<typeof StartUpCafeSchema>;
+
+export const UpdateStartupCafeSchema = StartUpCafeSchema.extend({
+  params: z.object({
+    id: z.string({
+      required_error: "Startup Cafe ID is required.",
+    }),
+  }),
+  body: StartUpCafeSchema.shape.body.extend({
+    id: z.string({
+      required_error: "Startup Cafe ID is required.",
+    }),
+    teamMembers: z
+      .array(
+        StudentSchema.extend({
+          id: z.number({
+            required_error: "Team member ID is required.",
+          }),
+          startupCafeId: z.string({
+            required_error: "Startup Cafe ID is required.",
+          }),
+        })
+      )
+      .min(1, { message: "At least 1 team member is required." })
+      .max(4, { message: "Maximum 4 team members allowed." }),
+    skipSubmission: z.boolean(),
+    approved: z.boolean(),
+    paymentId: z.string(),
+  }),
+});
+
+export type UpdateStartupCafeSchemaType = z.infer<
+  typeof UpdateStartupCafeSchema
+>;
