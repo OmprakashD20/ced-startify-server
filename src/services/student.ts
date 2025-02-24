@@ -18,10 +18,18 @@ export async function createStudent(
   return { id: student.id };
 }
 
-export async function getStudentByCafeID(startupCafeId: string, email: string, txn = db) {
+export async function getStudentByCafeID(
+  startupCafeId: string,
+  email: string,
+  phone: string,
+  txn = db
+) {
   return await txn.query.StudentTable.findFirst({
-    where: (fields) => eq(fields.startupCafeId, startupCafeId) && eq(fields.email, email)
-  })
+    where: (fields) =>
+      eq(fields.startupCafeId, startupCafeId) &&
+      eq(fields.email, email) &&
+      eq(fields.phone, phone),
+  });
 }
 
 export async function updateStudent(

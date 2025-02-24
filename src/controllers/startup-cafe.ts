@@ -104,15 +104,15 @@ export async function updateStartupCafeController(
     );
 
     students.forEach(async ({ id, ...student }) => {
-      console.log(id, student);
       const existingStudent = await getStudentByCafeID(
         student.startupCafeId,
-        student.email
+        student.email,
+        student.phone
       );
       if (existingStudent) {
         await updateStudent(student, id, txn);
       } else {
-        createStudent(student, txn);
+        await createStudent(student, txn);
       }
     });
   });
