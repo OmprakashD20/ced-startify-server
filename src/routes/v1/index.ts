@@ -11,6 +11,8 @@ import GurusPitchRouter from "@/routes/v1/gurus-pitch";
 import StartupDistrictRouter from "@/routes/v1/startup-district";
 import GoldenStarECellRouter from "@/routes/v1/golden-star-ecell";
 import FounderFindRouter from "@/routes/v1/founder-find";
+import { getEventCountController } from "@/controllers/events";
+import AsyncHandler from "@/utils/asyncHandler";
 
 const v1Router = express.Router();
 
@@ -25,5 +27,7 @@ v1Router.use("/gurus-pitch", GurusPitchRouter);
 v1Router.use("/founder-find", FounderFindRouter);
 v1Router.use("/startup-district", StartupDistrictRouter);
 v1Router.use("/golden-star-ecell", GoldenStarECellRouter);
+
+v1Router.get("/events/count", AsyncHandler(getEventCountController));
 
 export default v1Router;
