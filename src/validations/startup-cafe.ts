@@ -47,14 +47,6 @@ export const StartUpCafeSchema = z.object({
         required_error: "Sustainable Development Goal is required.",
       })
       .min(1, { message: "Sustainable Development Goal is required." }),
-    theme: z
-      .string()
-      .refine(
-        (val) => ["Artificial Intelligence", "Machine Learning"].includes(val),
-        {
-          message: "Please select the theme of your startup",
-        }
-      ),
     problemStatement: z.string({
       required_error: "Your problem statement is required.",
     }),
