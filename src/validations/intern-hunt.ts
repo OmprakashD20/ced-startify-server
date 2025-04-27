@@ -24,7 +24,7 @@ export const InternHuntStartupSchema = z.object({
   preferredSkills: z.string().min(1, "Preferred skills are required"),
   internshipPositions: z.string().min(1, "Number of positions is required"),
   internshipDuration: z.string().min(1, "Internship duration is required"),
-  internshipMode: z.enum(["On-site", "Remote", "Hybrid"]),
+  internshipMode: z.string().min(1, "Internship mode is required"),
   stipendDetails: z.string().optional(),
   isPaid: z.enum(["Paid", "Unpaid"]),
   paymentId: z.string().min(2, { message: "Payment ID is required." }),
