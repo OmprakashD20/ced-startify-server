@@ -36,6 +36,7 @@ export const StartUpCafeTable = pgTable("startup_cafe", {
   solution: text("solution").notNull(),
   approved: boolean().default(false),
   paymentId: text("payment_id").notNull(),
+  document: text().default("https://example.com/document"), // startup_cafe document after cohort/bootcamp
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
@@ -390,6 +391,9 @@ export const StartupDistrictMemberRelations = relations(
   })
 );
 
-export const StartupDistrictRelations = relations(StartupDistrictTable, ({ many }) => ({
-  members: many(StartupDistrictMemberTable),
-}));
+export const StartupDistrictRelations = relations(
+  StartupDistrictTable,
+  ({ many }) => ({
+    members: many(StartupDistrictMemberTable),
+  })
+);

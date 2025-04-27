@@ -90,3 +90,24 @@ export const UpdateStartupCafeSchema = StartUpCafeSchema.extend({
 export type UpdateStartupCafeSchemaType = z.infer<
   typeof UpdateStartupCafeSchema
 >;
+
+export const AddStartupCafeDocumentSchema = z.object({
+  query: z.object({
+    id: z.string({
+      required_error: "Startup Cafe ID is required.",
+    }),
+  }),
+  body: z.object({
+    document: z
+      .string({
+        required_error: "Document is required.",
+      })
+      .min(1, {
+        message: "Document is required.",
+      }),
+  }),
+});
+
+export type AddStartupCafeDocumentSchemaType = z.infer<
+  typeof AddStartupCafeDocumentSchema
+>;

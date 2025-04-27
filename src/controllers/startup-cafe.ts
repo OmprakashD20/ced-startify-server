@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import db from "@/drizzle";
 import {
+  addDocument,
   approveStartupCafe,
   createStartUpCafe,
   getColleges,
@@ -16,6 +17,7 @@ import {
   updateStudent,
 } from "@/services/student";
 import {
+  AddStartupCafeDocumentSchemaType,
   StartUpCafeSchemaType,
   UpdateStartupCafeSchemaType,
 } from "@/validations/startup-cafe";
@@ -32,6 +34,7 @@ export async function createProjectController(
       {
         ...data,
         sameInstitution: data.sameInstitution === "yes",
+        document: null,
       },
       txn
     );
@@ -98,6 +101,7 @@ export async function updateStartupCafeController(
       {
         ...data,
         sameInstitution: data.sameInstitution === "yes",
+        document: null,
       },
       data.id,
       txn
@@ -136,6 +140,23 @@ export async function approveStartupCafeController(
             <br><br>Your application for AU Startify 3.0 - "Startup Cafe Prototyping Hackathon" has been approved. <br><br> <strong>Team ID:</strong> ${id} <br> <strong>Status:</strong> <span class="status">Approved✅</span> <br> If you have any questions in the meantime, feel free to reach out to our support team.`,
     header: "Startup Cafe Prototyping Hackathon",
   });
+
+  return { statusCode: 200 };
+}
+
+export async function addStartupDocumentController(
+  req: Request<
+    {},
+    {},
+    AddStartupCafeDocumentSchemaType["body"],
+    AddStartupCafeDocumentSchemaType["query"]
+  >,
+  _res: Response
+): Promise<{ statusCode: number }> {
+  const { id } = req.query;
+  const { document } = req.body;
+
+  await addDocument(id, document);
 
   return { statusCode: 200 };
 }

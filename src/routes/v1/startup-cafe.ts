@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  addStartupDocumentController,
   approveStartupCafeController,
   createProjectController,
   getCollegesController,
@@ -37,6 +38,11 @@ StartUpCafeRouter.patch(
 StartUpCafeRouter.patch(
   "/approve/:id",
   AsyncHandler(approveStartupCafeController)
+);
+
+StartUpCafeRouter.patch(
+  "/add-document",
+  AsyncHandler(addStartupDocumentController)
 );
 
 export default StartUpCafeRouter;

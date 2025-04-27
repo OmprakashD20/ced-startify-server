@@ -79,3 +79,14 @@ export async function approveStartupCafe(
     .set(data)
     .where(eq(StartUpCafeTable.id, id));
 }
+
+export async function addDocument(
+  id: StartUpCafeParams["id"],
+  document: string,
+  txn = db
+) {
+  await txn
+    .update(StartUpCafeTable)
+    .set({ document })
+    .where(eq(StartUpCafeTable.id, id));
+}
