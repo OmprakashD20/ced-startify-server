@@ -146,10 +146,10 @@ export async function getStudentEntriesController(
 export async function startupLoginController(
   req: Request<{}, {}, StartupLoginSchemaType["body"], {}>,
   _: Response
-): Promise<{ statusCode: number; success: boolean }> {
+): Promise<{ statusCode: number; isLoggedIn: boolean }> {
   const { email, password } = req.body;
 
   const isVerified = await comparePassword(email, password);
 
-  return { statusCode: 200, success: isVerified };
+  return { statusCode: 200, isLoggedIn: isVerified };
 }
