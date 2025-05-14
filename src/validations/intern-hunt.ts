@@ -113,3 +113,14 @@ export type InternHuntStudentSchemaType = z.infer<
 >;
 
 export type InternHuntSchemaType = z.infer<typeof InternHuntSchema>;
+
+export const StartupLoginSchema = z.object({
+  body: z.object({
+    email: z.string().email({
+      message: "Invalid Email Address",
+    }),
+    password: z.string({ required_error: "Password is required" }),
+  }),
+});
+
+export type StartupLoginSchemaType = z.infer<typeof StartupLoginSchema>;

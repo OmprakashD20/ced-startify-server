@@ -84,7 +84,9 @@ export const InternHuntStartupTable = pgTable("intern_hunt_startups", {
   startupName: varchar("startup_name").notNull(),
   founderName: varchar("founder_name").notNull(),
   designation: varchar("designation").notNull(),
+  // creds
   email: varchar("email").notNull(),
+  password: varchar("password"),
   mobile: varchar("mobile").notNull(),
   website: varchar("website"),
   location: varchar("location").notNull(),

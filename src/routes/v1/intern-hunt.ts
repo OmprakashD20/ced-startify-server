@@ -1,12 +1,21 @@
-import express from "express";
+import express, { Request, Response } from "express";
 
-import { createInternHuntController, getStartupEntriesController, getStudentEntriesController } from "@/controllers/intern-hunt";
+import {
+  createInternHuntController,
+  getStartupEntriesController,
+  getStudentEntriesController,
+  startupLoginController,
+} from "@/controllers/intern-hunt";
 import AsyncHandler from "@/utils/asyncHandler";
 import ValidatorFactory from "@/validations";
 import {
   InternHuntSchema,
   InternHuntSchemaType,
 } from "@/validations/intern-hunt";
+
+import db from "@/drizzle";
+import { InternHuntStartupTable } from "@/drizzle/schema";
+import { eq, isNull } from "drizzle-orm";
 
 const InternHuntRouter = express.Router();
 
@@ -19,8 +28,16 @@ InternHuntRouter.post(
   AsyncHandler(createInternHuntController)
 );
 
-InternHuntRouter.get("/student-entries", AsyncHandler(getStudentEntriesController));
+InternHuntRouter.get(
+  "/student-entries",
+  AsyncHandler(getStudentEntriesController)
+);
 
-InternHuntRouter.get("/startup-entries", AsyncHandler(getStartupEntriesController));
+InternHuntRouter.get(
+  "/startup-entries",
+  AsyncHandler(getStartupEntriesController)
+);
+
+InternHuntRouter.post("/startup-login", AsyncHandler(startupLoginController));
 
 export default InternHuntRouter;

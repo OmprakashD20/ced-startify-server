@@ -9,9 +9,10 @@ import {
   InternHuntStartupSchemaType,
   InternHuntStudentSchemaType,
 } from "@/validations/intern-hunt";
+import { eq } from "drizzle-orm";
 
 export async function createStartup(
-  data: InternHuntStartupSchemaType,
+  data: InternHuntStartupSchemaType & { password: string },
   txn = db
 ): Promise<{ id: string }> {
   const [startup] = await txn
@@ -20,6 +21,7 @@ export async function createStartup(
       id: generateTeamId("IHSU"),
       ...data,
       internshipPositions: parseInt(data.internshipPositions),
+      password: "",
     })
     .returning();
 
@@ -58,4 +60,17 @@ export async function getStudentEntries(): Promise<{
   const entries = await db.query.InternHuntStudentTable.findMany();
 
   return { entries };
+}
+
+export async function comparePassword(
+  userEmail: string,
+  userPassword: string
+): Promise<boolean> {
+  const startup = await db.query.InternHuntStartupTable.findFirst({
+    where: eq(InternHuntStartupTable.email, userEmail),
+  });
+
+  if (!startup) return false;
+
+  return startup.password === userPassword;
 }
