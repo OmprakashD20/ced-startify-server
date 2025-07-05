@@ -6,7 +6,9 @@ export const StudentSchema = z.object({
   phone: z.string().min(10, { message: "Invalid phone number." }),
   degree: z.string().min(2, { message: "Degree is required." }),
   department: z.string().min(2, { message: "Department is required." }),
-  yearOfStudy: z.enum(["1", "2", "3", "4", "5"], {
+  gender: z.string().optional(),
+  diffAbled: z.string().optional(),
+  yearOfStudy: z.enum(["1", "2", "3", "4", "5", "Not a student"], {
     required_error: "Year of study is required.",
   }),
 });

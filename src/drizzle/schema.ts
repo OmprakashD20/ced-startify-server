@@ -3,7 +3,6 @@ import {
   pgTable,
   varchar,
   text,
-  primaryKey,
   boolean,
   timestamp,
   serial,
@@ -18,6 +17,8 @@ export const StudentTable = pgTable("students", {
   degree: varchar().notNull(),
   department: varchar().notNull(),
   yearOfStudy: varchar("year_of_study").notNull(),
+  gender: varchar(),
+  diffAbled: varchar("diff_abled"),
   startupCafeId: varchar({ length: 256 }).notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

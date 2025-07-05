@@ -43,6 +43,8 @@ export async function createProjectController(
       await createStudent(
         {
           ...student,
+          gender: student.gender ? student.gender : null,
+          diffAbled: student.diffAbled ? student.diffAbled : null,
           startupCafeId,
         },
         txn
@@ -114,9 +116,24 @@ export async function updateStartupCafeController(
         student.phone
       );
       if (existingStudent) {
-        await updateStudent(student, id, txn);
+        await updateStudent(
+          {
+            ...student,
+            gender: student.gender ? student.gender : null,
+            diffAbled: student.diffAbled ? student.diffAbled : null,
+          },
+          id,
+          txn
+        );
       } else {
-        await createStudent(student, txn);
+        await createStudent(
+          {
+            ...student,
+            gender: student.gender ? student.gender : null,
+            diffAbled: student.diffAbled ? student.diffAbled : null,
+          },
+          txn
+        );
       }
     });
   });
