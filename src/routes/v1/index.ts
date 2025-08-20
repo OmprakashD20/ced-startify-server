@@ -13,6 +13,7 @@ import GoldenStarECellRouter from "@/routes/v1/golden-star-ecell";
 import FounderFindRouter from "@/routes/v1/founder-find";
 import { getEventCountController } from "@/controllers/events";
 import AsyncHandler from "@/utils/asyncHandler";
+import IpoRouter from "./ip-to-ipo";
 
 const v1Router = express.Router();
 
@@ -27,6 +28,7 @@ v1Router.use("/gurus-pitch", GurusPitchRouter);
 v1Router.use("/founder-find", FounderFindRouter);
 v1Router.use("/startup-district", StartupDistrictRouter);
 v1Router.use("/golden-star-ecell", GoldenStarECellRouter);
+v1Router.use("/ip-to-ipo", IpoRouter);
 
 v1Router.get("/events/count", AsyncHandler(getEventCountController));
 

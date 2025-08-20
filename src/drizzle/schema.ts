@@ -315,6 +315,72 @@ export const FounderFindTable = pgTable("founder_find", {
   paymentId: varchar("payment_id").notNull(),
 });
 
+export const ipToIpo = pgTable("ipToIpo", {
+   id: varchar("id").primaryKey(),
+
+  // Section 1: Basic Information
+  fullName: varchar("full_name").notNull(),
+  email: varchar("email").notNull(),
+  mobileNumber: varchar("mobile_number").notNull(),
+  alternateContact: varchar("alternate_contact"),
+  address: text("address").notNull(),
+
+  // Section 2: Team Details
+  applicationType: varchar("application_type").notNull(),
+  memberCount: integer("member_count").notNull(),
+
+  // Section 3: Educational/Professional Background
+  educationalQualification: varchar("educational_qualification").notNull(),
+  currentAffiliation: varchar("current_affiliation").notNull(),
+  state: varchar("state").notNull(),
+  city: varchar("city").notNull(),
+
+  // Section 4: Idea/Project/Patent Details
+  projectTitle: varchar("project_title").notNull(),
+  innovationCategory: varchar("innovation_category").notNull(),
+  projectDescription: text("project_description").notNull(),
+  iprStatus: varchar("ipr_status").notNull(),
+  iprProof: varchar("ipr_proof").notNull(),
+
+  // Section 5: Market & Impact
+  problemStatement: text("problem_statement").notNull(),
+  targetMarket: text("target_market").notNull(),
+  developmentStage: varchar("development_stage").notNull(),
+  expectedImpact: text("expected_impact").notNull(),
+
+  // Section 6: Funding & Business Potential
+  priorFunding: varchar("prior_funding").notNull(),
+  fundingDetails: text("funding_details"),
+  estimatedFunding: varchar("estimated_funding").notNull(),
+  revenueModel: text("revenue_model").notNull(),
+
+  // payment
+  paymentId: varchar("payment_id").notNull(),
+});
+
+export const ipToIpoMembers = pgTable("ipToIpoMembers", {
+  id: serial("id").primaryKey(),
+  ipToIpoId: varchar("ip_to_ipo_id")
+    .notNull()
+    .references(() => ipToIpo.id, { onDelete: "cascade" }),
+
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 20 }).notNull(),
+  role: varchar("role", { length: 255 }).notNull(),
+});
+
+export const ipToIpoRelations = relations(ipToIpo, ({ many }) => ({
+  members: many(ipToIpoMembers),
+}));
+
+export const ipToIpoMembersRelations = relations(ipToIpoMembers, ({ one }) => ({
+  form: one(ipToIpo, {
+    fields: [ipToIpoMembers.ipToIpoId],
+    references: [ipToIpo.id],
+  }),
+}));
+
 export const StudentRelations = relations(StudentTable, ({ one }) => ({
   startupCafe: one(StartUpCafeTable, {
     fields: [StudentTable.startupCafeId],
