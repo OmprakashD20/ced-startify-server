@@ -63,7 +63,7 @@ export const IpToIpoSchema = z.object({
         required_error: "Please specify IPR status.",
       }
     ),
-    iprProof: z.string().url({ message: "Upload your IPR Proof" }),
+    iprProof: z.string().url({ message: "Upload your IPR Proof" }).optional(),
 
     // Section 5: Market & Impact
     problemStatement: z
