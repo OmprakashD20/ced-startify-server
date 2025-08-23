@@ -15,6 +15,7 @@ export async function createProjectController(
     const { id: ipoId } = await createIPtoIPO(
       {
         ...data,
+        iprProof: data.iprProof || "no-proof",
         alternateContact: data.alternateContact || null,
         fundingDetails: data.fundingDetails || null,
         memberCount: parseInt(data.memberCount, 10),
